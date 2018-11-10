@@ -22,17 +22,21 @@ namespace MowingPlanet.BattleScene
         /// <summary>プレイヤーの移動速度</summary>
         public float moveSpeed = 3f;
         /// <summary>プレイヤーが回転する速度</summary>
-        public float angularVelocity = 3f;
+        public float angularVelocity = 8f;
 
-        /// <summary>Animator</summary>
-        private Animator animator;
-        /// <summary></summary>
         private CapsuleCollider capsuleCollider;
+        private Animator animator;
+        /// <summary>AnimatorControllerのパラメータ : Speed</summary>
+        private string parametersSpeed = "Speed";
+        /// <summary>AnimatorControllerのパラメータ : Attack</summary>
+        private string parametersAttack = "Attack";
+        /// <summary>AnimatorControllerのパラメータ : Speed</summary>
+        private string parametersisRun = "isRunning";
 
         protected override void Start()
         {
             animator = GetComponent<Animator>();
-            //capsuleCollider = GetComponent<CapsuleCollider>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
             base.Start();
         }
 
@@ -43,6 +47,7 @@ namespace MowingPlanet.BattleScene
         {
             var horizontal = Input.GetAxis("Horizontal");
             var vertical = Input.GetAxis("Vertical");
+
             if(horizontal != 0f || vertical != 0f)
             {
                 var inputVec = new Vector3(horizontal, 0f, vertical); //インプットの合成値をベクトルに変換
@@ -53,14 +58,28 @@ namespace MowingPlanet.BattleScene
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnStep);
                 }
                 rb.velocity = inputVec * moveSpeed;
+
+                animator.SetFloat(parametersSpeed, 1f);
             }
+            else
+            {
+                animator.SetFloat(parametersSpeed, 0f);
+            }
+        }
 
-
+        private void Attack()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                animator.SetTrigger(parametersAttack); //アニメーションアタック
+                
+            }
         }
 
         private void FixedUpdate()
         {
             Move();
+            Attack();
         }
     }
 }
