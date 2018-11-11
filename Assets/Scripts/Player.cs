@@ -5,7 +5,14 @@ using UnityEngine;
 
 namespace MowingPlanet.BattleScene
 {
-
+    /// <summary>
+    /// animator state machineのステート一覧
+    /// </summary>
+    public enum AnimState
+    {
+        RightAttack, LeftAttack, UpperAttack
+    }
+    
     /// <summary>
     /// プレイヤー
     /// </summary>
@@ -32,6 +39,7 @@ namespace MowingPlanet.BattleScene
         private string parametersAttack = "Attack";
         /// <summary>AnimatorControllerのパラメータ : Speed</summary>
         private string parametersisRun = "isRunning";
+        private AnimState animState;
 
         protected override void Start()
         {
@@ -45,21 +53,23 @@ namespace MowingPlanet.BattleScene
         /// </summary>
         protected override void Move()
         {
-            var horizontal = Input.GetAxis("Horizontal");
-            var vertical = Input.GetAxis("Vertical");
+            var input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
 
-            if(horizontal != 0f || vertical != 0f)
+            //方向キーが入力されている、且つ攻撃中ではない時
+            if (input.magnitude > 0f
+                && !animator.GetCurrentAnimatorStateInfo(0).IsName(AnimState.LeftAttack.ToString())
+                && !animator.GetCurrentAnimatorStateInfo(0).IsName(AnimState.RightAttack.ToString())
+                && !animator.GetCurrentAnimatorStateInfo(0).IsName(AnimState.UpperAttack.ToString())
+                )
             {
-                var inputVec = new Vector3(horizontal, 0f, vertical); //インプットの合成値をベクトルに変換
-                var targetRot = Quaternion.LookRotation(inputVec,Vector3.up); //入力された方向への回転
+                var targetRot = Quaternion.LookRotation(input,Vector3.up); //入力された方向への回転
                 var turnStep = angularVelocity * Time.deltaTime; // 個々のパフォーマンスに応じて数値を正規化
-                if (transform.rotation != targetRot)
+                if (transform.rotation != targetRot) //回転先と自分の回転が一緒ではない時
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnStep);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnStep);　//sleap(球体線形補間),回転させる
                 }
-                rb.velocity = inputVec * moveSpeed;
-
-                animator.SetFloat(parametersSpeed, 1f);
+                rb.velocity = input * moveSpeed; // 方向キーの指す先 * 任意のスピードで移動させる
+                animator.SetFloat(parametersSpeed, 1f); //走るモーションをさせる
             }
             else
             {
@@ -71,8 +81,7 @@ namespace MowingPlanet.BattleScene
         {
             if (Input.GetMouseButtonDown(0))
             {
-                animator.SetTrigger(parametersAttack); //アニメーションアタック
-                
+                animator.SetTrigger(parametersAttack); //アタックアニメーション
             }
         }
 
@@ -80,6 +89,11 @@ namespace MowingPlanet.BattleScene
         {
             Move();
             Attack();
+        }
+
+        private void DisabledRunning()
+        {
+            
         }
     }
 }
