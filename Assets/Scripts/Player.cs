@@ -12,7 +12,16 @@ namespace MowingPlanet.BattleScene
     {
         RightAttack, LeftAttack, UpperAttack
     }
-    
+
+    /// <summary>
+    /// animator controllerのパラメータ一覧
+    /// </summary>
+    public enum AnimParameter
+    {
+        Speed,Attack,IsRunning
+    }
+
+
     /// <summary>
     /// プレイヤー
     /// </summary>
@@ -33,14 +42,6 @@ namespace MowingPlanet.BattleScene
 
         private CapsuleCollider capsuleCollider;
         private Animator animator;
-        /// <summary>AnimatorControllerのパラメータ : Speed</summary>
-        private string parametersSpeed = "Speed";
-        /// <summary>AnimatorControllerのパラメータ : Attack</summary>
-        private string parametersAttack = "Attack";
-        /// <summary>AnimatorControllerのパラメータ : Speed</summary>
-        private string parametersisRun = "isRunning";
-        private AnimState animState;
-
         protected override void Start()
         {
             animator = GetComponent<Animator>();
@@ -69,11 +70,11 @@ namespace MowingPlanet.BattleScene
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnStep);　//sleap(球体線形補間),回転させる
                 }
                 rb.velocity = input * moveSpeed; // 方向キーの指す先 * 任意のスピードで移動させる
-                animator.SetFloat(parametersSpeed, 1f); //走るモーションをさせる
+                animator.SetFloat(AnimParameter.Speed.ToString(), 1f); //走るモーションをさせる
             }
             else
             {
-                animator.SetFloat(parametersSpeed, 0f);
+                animator.SetFloat(AnimParameter.Speed.ToString(), 0f);
             }
         }
 
@@ -81,7 +82,7 @@ namespace MowingPlanet.BattleScene
         {
             if (Input.GetMouseButtonDown(0))
             {
-                animator.SetTrigger(parametersAttack); //アタックアニメーション
+                animator.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
             }
         }
 
