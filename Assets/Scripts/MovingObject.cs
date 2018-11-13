@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MowingPlanet.BattleScene
+namespace MowingPlanet.StageScene
 {
-    [RequireComponent(typeof(Rigidbody))]
     public abstract class MovingObject : MonoBehaviour
     {
-        protected Rigidbody rb;
+        /// <summary>同じオブジェクトに追加された CharacterController への参照</summary>
+        protected CharacterController m_charaCtrl;
 
         protected virtual void Start()
         {
-            rb = GetComponent<Rigidbody>();
+            m_charaCtrl = GetComponent<CharacterController>();
         }
 
         protected abstract void Move();
