@@ -5055,6 +5055,7 @@ MonoBehaviour:
   m_turnSpeed: 8
   m_jumpPower: 10
   m_directionalStandard: {fileID: 0}
+  m_gravityMultiplier: 1
 --- !u!137 &137035509284588674
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
