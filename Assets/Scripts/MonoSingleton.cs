@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DemonicCity
+namespace MowingPlanet
 {
     /// <summary>
     /// Mono singleton.
