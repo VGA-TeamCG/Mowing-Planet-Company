@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MowingPlanet.StageScene
+namespace MowingPlanetCompany.StageScene
 {
     public abstract class MovingObject : MonoBehaviour
     {

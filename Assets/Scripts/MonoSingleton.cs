@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MowingPlanet
+namespace MowingPlanetCompany
 {
     /// <summary>
     /// Mono singleton.

@@ -2,23 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MowingPlanet.StageScene
+namespace MowingPlanetCompany.StageScene
 {
-    /// <summary>
-    /// animator state machineのステート一覧
-    /// </summary>
-    public enum AnimState
-    {
-        RightAttack, LeftAttack, UpperAttack,Jump
-    }
-
-    /// <summary>
-    /// animator controllerのパラメータ一覧
-    /// </summary>
-    public enum AnimParameter
-    {
-        Speed, Attack, IsRunning,IsGrounded
-    }
 
     public class PlayerController : MovingObject
     {     

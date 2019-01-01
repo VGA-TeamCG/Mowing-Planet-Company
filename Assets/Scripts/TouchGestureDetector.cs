@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-namespace MowingPlanet
+namespace MowingPlanetCompany
 {
     /// <summary>
     /// Touch gesture detector for Unity.
@@ -49,7 +49,7 @@ namespace MowingPlanet
         public Camera ShootingCamera;
         /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
         public bool DetectFlick = true;
-        /// <summary>UnityEventクラスを引数を持てる様に継承したクラス</summary>
+        /// <summary>タッチジェスチャーのイベントシステム</summary>
         public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
         /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
         List<TouchInfo> TouchInfos = new List<TouchInfo>();
@@ -301,7 +301,7 @@ namespace MowingPlanet
                 }
 
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
-                if (targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
+                if (targetGameObject == null || targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
                 {
                     var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
                     RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);
@@ -345,14 +345,6 @@ namespace MowingPlanet
                 hitResult = null; // Raycastに何も引っかからなかった場合out引数をnull,returnをfalseにする
                 return false;
             }
-        }
-
-        /// <summary>
-        /// 作ったゲームオブジェクトをシーン遷移しても壊されない様にする
-        /// </summary>
-        public override void OnInitialize()
-        {
-            DontDestroyOnLoad(Instance);
         }
 
         /// <summary>
