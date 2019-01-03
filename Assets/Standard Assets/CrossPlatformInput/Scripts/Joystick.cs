@@ -1,118 +1,52 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityStandardAssets.CrossPlatformInput
+namespace MowingPlanetCompany
 {
-	public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
-	{
-		public enum AxisOption
-		{
-			// Options for which axes to use
-			Both, // Use both
-			OnlyHorizontal, // Only horizontal
-			OnlyVertical // Only vertical
-		}
+    public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+    {
+        [Header("Options")]
+        [Range(0f, 2f)] public float handleLimit = 1f;
+        public JoystickMode joystickMode = JoystickMode.Both;
 
-		public int MovementRange = 100;
-		public AxisOption axesToUse = AxisOption.Both; // The options for the axes that the still will use
-		public string horizontalAxisName = "Horizontal"; // The name given to the horizontal axis for the cross platform input
-		public string verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
+        protected Vector2 inputVector = Vector2.zero;
 
-		Vector3 m_StartPos;
-		bool m_UseX; // Toggle for using the x axis
-		bool m_UseY; // Toggle for using the Y axis
-		CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
-		CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
+        [Header("Components")]
+        public RectTransform background;
+        public RectTransform handle;
 
-		void OnEnable()
-		{
-			CreateVirtualAxes();
-		}
+        public float Horizontal { get { return inputVector.x; } }
+        public float Vertical { get { return inputVector.y; } }
+        public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
-        void Start()
+        public virtual void OnDrag(PointerEventData eventData)
         {
-            m_StartPos = transform.position;
+
         }
 
-		void UpdateVirtualAxes(Vector3 value)
-		{
-			var delta = m_StartPos - value;
-			delta.y = -delta.y;
-			delta /= MovementRange;
-			if (m_UseX)
-			{
-				m_HorizontalVirtualAxis.Update(-delta.x);
-			}
+        public virtual void OnPointerDown(PointerEventData eventData)
+        {
 
-			if (m_UseY)
-			{
-				m_VerticalVirtualAxis.Update(delta.y);
-			}
-		}
+        }
 
-		void CreateVirtualAxes()
-		{
-			// set axes to use
-			m_UseX = (axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyHorizontal);
-			m_UseY = (axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyVertical);
+        public virtual void OnPointerUp(PointerEventData eventData)
+        {
 
-			// create new axes based on axes to use
-			if (m_UseX)
-			{
-				m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
-				CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
-			}
-			if (m_UseY)
-			{
-				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
-				CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
-			}
-		}
+        }
 
+        protected void ClampJoystick()
+        {
+            if (joystickMode == JoystickMode.Horizontal)
+                inputVector = new Vector2(inputVector.x, 0f);
+            if (joystickMode == JoystickMode.Vertical)
+                inputVector = new Vector2(0f, inputVector.y);
+        }
+    }
 
-		public void OnDrag(PointerEventData data)
-		{
-			Vector3 newPos = Vector3.zero;
-
-			if (m_UseX)
-			{
-				int delta = (int)(data.position.x - m_StartPos.x);
-				delta = Mathf.Clamp(delta, - MovementRange, MovementRange);
-				newPos.x = delta;
-			}
-
-			if (m_UseY)
-			{
-				int delta = (int)(data.position.y - m_StartPos.y);
-				delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
-				newPos.y = delta;
-			}
-			transform.position = new Vector3(m_StartPos.x + newPos.x, m_StartPos.y + newPos.y, m_StartPos.z + newPos.z);
-			UpdateVirtualAxes(transform.position);
-		}
-
-
-		public void OnPointerUp(PointerEventData data)
-		{
-			transform.position = m_StartPos;
-			UpdateVirtualAxes(m_StartPos);
-		}
-
-
-		public void OnPointerDown(PointerEventData data) { }
-
-		void OnDisable()
-		{
-			// remove the joysticks from the cross platform input
-			if (m_UseX)
-			{
-				m_HorizontalVirtualAxis.Remove();
-			}
-			if (m_UseY)
-			{
-				m_VerticalVirtualAxis.Remove();
-			}
-		}
-	}
+    public enum JoystickMode
+    {
+        Both,
+        Horizontal,
+        Vertical,
+    }
 }

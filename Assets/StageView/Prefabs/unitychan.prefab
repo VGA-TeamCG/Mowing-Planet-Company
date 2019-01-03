@@ -5051,11 +5051,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d6cbec1388044896de3c049da9dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 10
-  m_turnSpeed: 8
+  m_moveSpeed: 5
+  m_turnSpeed: 0.1
   m_jumpPower: 10
   m_directionalStandard: {fileID: 0}
   m_gravityMultiplier: 1
+  m_FJoyStick: {fileID: 0}
 --- !u!137 &137035509284588674
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

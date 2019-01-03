@@ -17,6 +17,8 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] Transform m_directionalStandard;
         // 重力加速度を調整するパラメーター
         [SerializeField] float m_gravityMultiplier = 1f;
+        /// <summary>浮動ジョイスティック</summary>
+        [SerializeField] FloatingJoystick m_FJoyStick;
 
 
         /// <summary>同じオブジェクトに追加された Animator への参照</summary>
@@ -37,8 +39,8 @@ namespace MowingPlanetCompany.StageScene
         protected override void Move()
         {
             //方向の入力を取得する
-            float h = Input.GetAxis("Horizontal"); //horizontalの略。水平方向の入力。
-            float v = Input.GetAxis("Vertical"); //verticalの略。垂直方向の入力。
+            float h = (Input.GetAxis("Horizontal") == 0f) ? m_FJoyStick.Horizontal : Input.GetAxis("Horizontal"); //方向キーの入力が無い時はジョイスティックから入力をとる
+            float v = (Input.GetAxis("Vertical") == 0f) ? m_FJoyStick.Vertical : Input.GetAxis("Vertical"); // 方向キーの入力が無い時はジョイスティックから入力をとる
             Vector3 dir = Vector3.zero; //directionの略。移動する方向を表す。ここでは移動する方向の速度ベクトルを表す。
             
             // x-z 平面(地面と平行)の速度を求める
