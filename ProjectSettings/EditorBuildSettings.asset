@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: bff3383465e79b8458125cd41bdd2771
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/Stage.unity
     guid: cf676915c82c5524f90bad53fcc49ea1
   - enabled: 1
     path: Assets/Scenes/Equip.unity
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test/FloatingStick.unity
     guid: 590911e5293f2204ba3d5a6a99628243
+  - enabled: 1
+    path: Assets/Scenes/Setting.unity
+    guid: 2f85591fc67953d4e8a5582fceea5744
   m_configObjects: {}

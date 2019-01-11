@@ -10,11 +10,11 @@ namespace MowingPlanetCompany
     /// </summary>
     public class SceneFader : MonoSingleton<SceneFader>
     {
-        public SceneTitle PreviousScene
+      /*  public SceneTitle PreviousScene
         {
             get { return m_previousScene; }
             set { m_previousScene = value; }
-        }
+        }*/
 
         /// <summary>フェード時に使用するCanvas</summary>
         private Canvas m_fadeCanvas;
@@ -27,7 +27,9 @@ namespace MowingPlanetCompany
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
         /// <summary>遷移前のシーンタイトル</summary>
-        private SceneTitle m_previousScene;
+        private string m_previousScene;
+
+        private string m_currentScene;
 
         /// <summary>
         /// 初期化
@@ -58,6 +60,7 @@ namespace MowingPlanetCompany
         /// </summary>
         public void FadeIn(float fadeTime = 0f)
         {
+            m_currentScene = SceneManager.GetActiveScene().name;
             if (fadeTime != 0f)
             {
                 m_fadeTime = fadeTime;
@@ -73,6 +76,7 @@ namespace MowingPlanetCompany
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
         public void FadeOut(SceneTitle sceneTitle, float fadeTime = 0f)
         {
+            m_previousScene = SceneManager.GetActiveScene().name;
             if (fadeTime != 0f)
             {
                 m_fadeTime = fadeTime;
@@ -115,6 +119,10 @@ namespace MowingPlanetCompany
                 m_alpha += Time.deltaTime / m_fadeTime;
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
                 yield return null;
+            }
+            if (m_currentScene == "Setting")
+            {
+                SceneManager.LoadScene(m_previousScene);
             }
             SceneManager.LoadScene(m_nextSceneTitle);
         }
