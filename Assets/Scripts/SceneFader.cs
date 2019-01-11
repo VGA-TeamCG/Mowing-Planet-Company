@@ -36,9 +36,6 @@ namespace MowingPlanetCompany
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
         /// <summary>遷移前のシーンタイトル</summary>
-        private string m_previousScene;
-
-        private string m_currentScene;
         private SceneTitle m_previousScene;
         #endregion
 
@@ -72,7 +69,6 @@ namespace MowingPlanetCompany
         /// </summary>
         public void FadeIn(float fadeTime = 0f)
         {
-            m_currentScene = SceneManager.GetActiveScene().name;
             if (fadeTime != 0f)
             {
                 m_fadeTime = fadeTime;
@@ -88,14 +84,13 @@ namespace MowingPlanetCompany
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
         public void FadeOut(SceneTitle sceneTitle, float fadeTime = 0f)
         {
-            m_previousScene = SceneManager.GetActiveScene().name;
             if (fadeTime != 0f)
             {
                 m_fadeTime = fadeTime;
             }
 
             // 現在のシーン名からenumを取得してシーン遷移前のシーン情報を保存する
-            PreviousScene = (SceneTitle)Enum.Parse(typeof(SceneTitle), SceneManager.GetActiveScene().name,true);
+            PreviousScene = (SceneTitle)Enum.Parse(typeof(SceneTitle), SceneManager.GetActiveScene().name, true);
             Debug.Log(PreviousScene);
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
@@ -134,10 +129,6 @@ namespace MowingPlanetCompany
                 m_alpha += Time.deltaTime / m_fadeTime;
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
                 yield return null;
-            }
-            if (m_currentScene == "Setting")
-            {
-                SceneManager.LoadScene(m_previousScene);
             }
             SceneManager.LoadScene(m_nextSceneTitle);
         }
