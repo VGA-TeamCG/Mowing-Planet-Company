@@ -6,17 +6,22 @@ namespace MowingPlanetCompany.StageScene
 {
 
     public class PlayerController : MovingObject
-    {     
+    {
+        #region Field
+        [Header("Parameters")]
         /// <summary>移動速度を調整するパラメータ</summary>
         [SerializeField] float m_moveSpeed = 5f;
         /// <summary>プレイヤーが回転する速度</summary>
         [SerializeField] float m_turnSpeed = 8f;
         /// <summary>ジャンプ力を調整するパラメータ</summary>
         [SerializeField] float m_jumpPower = 10f;
-        /// <summary>操作の標準とする向き</summary>
-        [SerializeField] Transform m_directionalStandard;
         // 重力加速度を調整するパラメーター
         [SerializeField] float m_gravityMultiplier = 1f;
+
+
+        [Header("Components")]
+        /// <summary>操作の標準とする向き</summary>
+        [SerializeField] Transform m_directionalStandard;
         /// <summary>浮動ジョイスティック</summary>
         [SerializeField] FloatingJoystick m_FJoyStick;
 
@@ -30,6 +35,8 @@ namespace MowingPlanetCompany.StageScene
         // 縦方向の速度
         private float m_verticalVelocity = 0f;
 
+        #endregion
+        #region Method
         protected override void Start()
         {
             m_anim = GetComponent<Animator>();
@@ -92,5 +99,6 @@ namespace MowingPlanetCompany.StageScene
             Move();
             Attack();
         }
+        #endregion
     }
 }
