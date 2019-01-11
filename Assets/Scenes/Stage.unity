@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2928,6 +2928,11 @@ Prefab:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114698016596881706, guid: e1511f17fb20e44bd86a59cd445ac8b3,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1511f17fb20e44bd86a59cd445ac8b3, type: 2}
   m_IsPrefabAsset: 0
@@ -3471,6 +3476,15 @@ Prefab:
       propertyPath: near clip plane
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1967921903932722, guid: 0daf5524da4d19e4191696f1749e384c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20019437689063466, guid: 0daf5524da4d19e4191696f1749e384c,
+        type: 2}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0daf5524da4d19e4191696f1749e384c, type: 2}
   m_IsPrefabAsset: 0
@@ -3615,7 +3629,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4513600211472502, guid: 6ab8d6f5429bc473e87958a68af85c41, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 13.41
       objectReference: {fileID: 0}
     - target: {fileID: 4513600211472502, guid: 6ab8d6f5429bc473e87958a68af85c41, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3659,17 +3673,17 @@ Prefab:
     - target: {fileID: 20462321620386614, guid: 6ab8d6f5429bc473e87958a68af85c41,
         type: 2}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 20462321620386614, guid: 6ab8d6f5429bc473e87958a68af85c41,
         type: 2}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 20462321620386614, guid: 6ab8d6f5429bc473e87958a68af85c41,
         type: 2}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 20462321620386614, guid: 6ab8d6f5429bc473e87958a68af85c41,
         type: 2}
@@ -3685,6 +3699,11 @@ Prefab:
         type: 2}
       propertyPath: m_TargetDisplay
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20462321620386614, guid: 6ab8d6f5429bc473e87958a68af85c41,
+        type: 2}
+      propertyPath: m_OcclusionCulling
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab8d6f5429bc473e87958a68af85c41, type: 2}
