@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
     /// <summary>
     /// Attack command.
     /// </summary>
-    public class AttackCommandModule : BaseInputModule
+    public class AttackCommandModule : BaseInputModule, IPointerDownHandler
     {
         /// <summary>Player</summary>
         [SerializeField] GameObject m_player;
@@ -19,8 +19,11 @@ namespace MowingPlanetCompany.StageScene
         /// <param name="eventData">Event data.</param>
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("Called OnPointerDown");
-            //Process();
+            ExecuteEvents.Execute<ICommandHandler>(
+            target: m_player,
+            eventData: new BaseEventData(eventSystem),
+            functor: (commander, BaseEventData) => commander.OnAttack()
+            );
         }
 
         /// <summary>

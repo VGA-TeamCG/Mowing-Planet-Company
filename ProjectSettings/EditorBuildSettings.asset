@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Equip.unity
     guid: 8285e2ae0f1bb054e8a2ebe2e4c70f47
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/FloatingStick.unity
     guid: 590911e5293f2204ba3d5a6a99628243
   - enabled: 1

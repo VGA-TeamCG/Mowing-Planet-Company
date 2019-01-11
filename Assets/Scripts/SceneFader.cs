@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace MowingPlanetCompany
 {
@@ -15,7 +16,20 @@ namespace MowingPlanetCompany
             get { return m_previousScene; }
             set { m_previousScene = value; }
         }*/
+        #region Property
 
+        /// <summary>
+        /// シーン遷移前のシーン情報バッファ
+        /// </summary>
+        /// <value>The previous scene.</value>
+        public SceneTitle PreviousScene
+        {
+            get { return m_previousScene; }
+            set { m_previousScene = value; }
+        }
+        #endregion
+
+        #region Field
         /// <summary>フェード時に使用するCanvas</summary>
         private Canvas m_fadeCanvas;
         /// <summary>フェーディング演出に使うImage</summary>
@@ -30,7 +44,10 @@ namespace MowingPlanetCompany
         private string m_previousScene;
 
         private string m_currentScene;
+        private SceneTitle m_previousScene;
+        #endregion
 
+        #region Method
         /// <summary>
         /// 初期化
         /// </summary>
@@ -82,6 +99,9 @@ namespace MowingPlanetCompany
                 m_fadeTime = fadeTime;
             }
 
+            // 現在のシーン名からenumを取得してシーン遷移前のシーン情報を保存する
+            PreviousScene = (SceneTitle)Enum.Parse(typeof(SceneTitle), SceneManager.GetActiveScene().name,true);
+            Debug.Log(PreviousScene);
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
         }
@@ -128,13 +148,27 @@ namespace MowingPlanetCompany
         }
 
         /// <summary>
+        /// Start this instance.
+        /// </summary>
+        private void Start()
+        {
+            // Scene遷移時に自動的にフェードイン処理を行う
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                FadeIn();
+            };
+        }
+
+        /// <summary>
         /// インスタンス生成時に行う任意の処理
         /// </summary>
         public override void OnInitialize()
         {
             DontDestroyOnLoad(this);
         }
+        #endregion
 
+        #region enum
         /// <summary>
         /// Sceneのタイトル一覧
         /// </summary>
@@ -146,5 +180,6 @@ namespace MowingPlanetCompany
             Equip,
             Setting,
         }
+        #endregion
     }
 }
