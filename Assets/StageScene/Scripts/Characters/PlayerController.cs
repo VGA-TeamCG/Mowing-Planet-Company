@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MowingPlanetCompany.StageScene
 {
 
-    public class PlayerController : MovingObject
+    public class PlayerController : MovingObject, ICommandHandler
     {
         #region Field
         [Header("Parameters")]
@@ -49,11 +49,11 @@ namespace MowingPlanetCompany.StageScene
             float h = (Input.GetAxis("Horizontal") == 0f) ? m_FJoyStick.Horizontal : Input.GetAxis("Horizontal"); //方向キーの入力が無い時はジョイスティックから入力をとる
             float v = (Input.GetAxis("Vertical") == 0f) ? m_FJoyStick.Vertical : Input.GetAxis("Vertical"); // 方向キーの入力が無い時はジョイスティックから入力をとる
             Vector3 dir = Vector3.zero; //directionの略。移動する方向を表す。ここでは移動する方向の速度ベクトルを表す。
-            
+
             // x-z 平面(地面と平行)の速度を求める
             dir += new Vector3(h, 0, v) * m_moveSpeed; // 方向の入力で、x-z平面の移動方向が決まる。
 
-            if(dir != Vector3.zero //移動の入力がされている、且つ攻撃モーションではない時
+            if (dir != Vector3.zero //移動の入力がされている、且つ攻撃モーションではない時
                 && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.LeftAttack.ToString())
                 && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.RightAttack.ToString())
                 && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.UpperAttack.ToString())
@@ -61,7 +61,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 dir = m_directionalStandard.TransformDirection(dir);//カメラに対して正面の向きに変換する
                 dir.y = 0; // キャラを常に水平方向に向ける
-                transform.forward = Vector3.Slerp(transform.forward,dir,m_turnSpeed); // 入力された向きに対して少し遅延しながら入力方向に向かせる
+                transform.forward = Vector3.Slerp(transform.forward, dir, m_turnSpeed); // 入力された向きに対して少し遅延しながら入力方向に向かせる
                 m_charaCtrl.Move(dir * Time.deltaTime); // ここでキャラクターを入力方向へ動かす
                 m_anim.SetFloat(AnimParameter.Speed.ToString(), dir.sqrMagnitude);
             }
@@ -86,18 +86,20 @@ namespace MowingPlanetCompany.StageScene
             }
         }
 
-        private void Attack()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
-            }
-        }
-
+        /// <summary>
+        /// Update
+        /// </summary>
         private void Update()
         {
             Move();
-            Attack();
+        }
+
+        /// <summary>
+        /// Ons the attack.
+        /// </summary>
+        public void OnAttack()
+        {
+            m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
         }
         #endregion
     }

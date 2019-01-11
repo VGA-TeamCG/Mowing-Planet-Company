@@ -2359,7 +2359,7 @@ GameObject:
   - component: {fileID: 143435815342872462}
   - component: {fileID: 114072619617317804}
   m_Layer: 0
-  m_Name: unitychan
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5054,8 +5054,8 @@ MonoBehaviour:
   m_moveSpeed: 5
   m_turnSpeed: 0.1
   m_jumpPower: 10
-  m_directionalStandard: {fileID: 0}
   m_gravityMultiplier: 1
+  m_directionalStandard: {fileID: 0}
   m_FJoyStick: {fileID: 0}
 --- !u!137 &137035509284588674
 SkinnedMeshRenderer:
