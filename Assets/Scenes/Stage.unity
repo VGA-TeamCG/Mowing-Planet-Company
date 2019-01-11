@@ -3764,7 +3764,32 @@ Prefab:
     - target: {fileID: 114865723772521388, guid: 174ad8ed5643f4b9d93a090dcc977416,
         type: 2}
       propertyPath: m_sendNavigationEvents
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284066485539540, guid: 174ad8ed5643f4b9d93a090dcc977416,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865723772521388, guid: 174ad8ed5643f4b9d93a090dcc977416,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223891737676672956, guid: 174ad8ed5643f4b9d93a090dcc977416,
+        type: 2}
+      propertyPath: m_RenderMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223891737676672956, guid: 174ad8ed5643f4b9d93a090dcc977416,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1837267495}
+    - target: {fileID: 223891737676672956, guid: 174ad8ed5643f4b9d93a090dcc977416,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -397884873
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174ad8ed5643f4b9d93a090dcc977416, type: 2}
@@ -4356,6 +4381,26 @@ Prefab:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223489970136573048, guid: 9b9553eda69b4db4a9017f7eb45ff673,
+        type: 2}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223489970136573048, guid: 9b9553eda69b4db4a9017f7eb45ff673,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223489970136573048, guid: 9b9553eda69b4db4a9017f7eb45ff673,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1837267495}
+    - target: {fileID: 223489970136573048, guid: 9b9553eda69b4db4a9017f7eb45ff673,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -397884873
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b9553eda69b4db4a9017f7eb45ff673, type: 2}
   m_IsPrefabAsset: 0
@@ -4561,6 +4606,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4281140606371222, guid: 3332f62d62cfae945b8842a8a95bfd85,
     type: 2}
   m_PrefabInternal: {fileID: 397527101}
+--- !u!20 &1837267495 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20019437689063466, guid: 0daf5524da4d19e4191696f1749e384c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1261170564}
 --- !u!1001 &1848071186
 Prefab:
   m_ObjectHideFlags: 0
