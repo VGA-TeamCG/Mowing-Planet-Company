@@ -41,7 +41,7 @@ namespace MowingPlanetCompany.StageScene
             public enum State
             {
                 InitGame,
-                InGame,
+                InTheGame,
                 GameOver,
                 GameClear,
                 Pause,
