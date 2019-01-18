@@ -93,7 +93,7 @@ namespace MowingPlanetCompany
             PreviousScene = (SceneTitle)Enum.Parse(typeof(SceneTitle), SceneManager.GetActiveScene().name, true);
             Debug.Log(PreviousScene);
             m_nextSceneTitle = sceneTitle.ToString();
-            StartCoroutine(FadingOut());
+            StartCoroutine(FadingOut(m_nextSceneTitle));
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace MowingPlanetCompany
         /// <summary>
         /// フェードアウトのコルーチン
         /// </summary>
-        IEnumerator FadingOut()
+        IEnumerator FadingOut(string m_nextSceneTitle)
         {
             if (m_fadeImage == null)
             {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,9 @@ namespace MowingPlanetCompany
     /// シーン遷移の関数群
     /// </summary>
     public class SceneController : MonoBehaviour
-    {
+    {       
+        SceneFader sceneFader;
+
         /// <summary>Title画面に切り替える</summary>
         public void TitleLoad()
         {
@@ -27,7 +30,6 @@ namespace MowingPlanetCompany
         /// <summary>設定画面に切り替える</summary>
         public void SettingLoad()
         {
-
             Debug.Log("Setting Loaded.");
             SceneManager.LoadScene("Setting");
         }
