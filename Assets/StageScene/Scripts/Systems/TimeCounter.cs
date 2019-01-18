@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
     /// <summary>
     /// Time counter.
     /// </summary>
-    public class TimeCounter : MonoSingleton<TimeCounter>
+    public class TimeCounter : MonoBehaviour
     {
         /// <summary>hour</summary>
         [SerializeField] int m_hour;
@@ -60,11 +60,6 @@ namespace MowingPlanetCompany.StageScene
         public float GetDiff(float time)
         {
             return m_totalTime - time; // 開始時刻からトータル経過時刻の差分をとって経過時刻として返す
-        }
-
-        public override void OnInitialize()
-        {
-            DontDestroyOnLoad(Instance); // シーン上に生存させ続ける
         }
     }
 }

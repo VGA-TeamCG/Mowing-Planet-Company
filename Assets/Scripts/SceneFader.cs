@@ -91,7 +91,6 @@ namespace MowingPlanetCompany
 
             // 現在のシーン名からenumを取得してシーン遷移前のシーン情報を保存する
             PreviousScene = (SceneTitle)Enum.Parse(typeof(SceneTitle), SceneManager.GetActiveScene().name, true);
-            Debug.Log(PreviousScene);
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
         }
@@ -113,6 +112,7 @@ namespace MowingPlanetCompany
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
                 yield return null;
             }
+            m_fadeCanvas.enabled = false;
         }
 
         /// <summary>
@@ -124,6 +124,8 @@ namespace MowingPlanetCompany
             {
                 Init();
             }
+            m_fadeCanvas.enabled = true;
+
             while (m_alpha < 1f)
             {
                 m_alpha += Time.deltaTime / m_fadeTime;
