@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4168607213702412}
-  - component: {fileID: 114650274736895582}
+  - component: {fileID: 114378440068805110}
   m_Layer: 0
   m_Name: StageSceneManager
   m_TagString: Untagged
@@ -71,6 +71,21 @@ Transform:
   m_Father: {fileID: 4168607213702412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114378440068805110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174205095883918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae277211a01be54ca8ecdd13dee5329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_setMinute: 0
+  m_setSeconds: 0
+  m_timerText: {fileID: 114475492642048312, guid: 5566a00e3d0655c41857cd2e9ba42756,
+    type: 2}
 --- !u!114 &114466529960464752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,19 +168,3 @@ MonoBehaviour:
   sendMessageTarget: {fileID: 0}
   useUnityEvents: 0
   layers: []
---- !u!114 &114650274736895582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174205095883918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798c142a7a1c02b488156391d4ad898e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hour: 0
-  m_minute: 0
-  m_seconds: 0
-  m_timeScale: 1
-  m_totalTimeText: {fileID: 0}
