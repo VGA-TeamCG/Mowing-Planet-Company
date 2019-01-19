@@ -29,6 +29,7 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] Transform m_directionalStandard;
         /// <summary>浮動ジョイスティック</summary>
         [SerializeField] FloatingJoystick m_FJoyStick;
+        TimeManager m_timeManager;
 
 
         /// <summary>同じオブジェクトに追加された Animator への参照</summary>
@@ -42,10 +43,11 @@ namespace MowingPlanetCompany.StageScene
 
         #endregion
         #region Method
-        private void Start()
+        private void Awake()
         {
             m_anim = GetComponent<Animator>();
             m_charaCtrl = GetComponent<CharacterController>();
+            m_timeManager = TimeManager.Instance;
         }
 
         private void Move()

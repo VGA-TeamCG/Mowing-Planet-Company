@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MowingPlanetCompany
+namespace MowingPlanetCompany.StageScene
 {
-    public class Mowie : MonoBehaviour
+    public class MinimapCamera : MonoBehaviour
     {
-        
     }
 }
-

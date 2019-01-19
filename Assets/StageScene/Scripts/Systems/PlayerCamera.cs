@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// カメラ管理クラス
 /// </summary>
-public class CameraManager : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     /// <summary>カメラの親オブジェクト。注視点とその点への回り込み角度を管理する</summary>
     private Transform m_cameraParent;

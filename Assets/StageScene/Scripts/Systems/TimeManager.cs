@@ -11,29 +11,6 @@ namespace MowingPlanetCompany.StageScene
     /// </summary>
     public class TimeManager : MonoSingleton<TimeManager>
     {
-
-        #region Property
-        /// <summary>タイマーのスイッチングフラグ</summary>
-        public bool Toggle
-        {
-            get
-            { return m_toggle; }
-            set
-            {
-                if (m_stageManager.m_StteMachine.m_state == StageManager.StateMachine.State.InTheGame) // InTheGameのステートの時だけ代入可能
-                {
-                    m_toggle = value;
-                }
-                else
-                {
-                    Debug.LogWarning("State がInTheGameの時だけ代入可能です");
-                }
-            }
-        }
-
-
-
-        #endregion
         #region Field
         /// <summary>イベントに使用するデリゲート</summary>
         public delegate void CountDownEvent();
@@ -64,8 +41,6 @@ namespace MowingPlanetCompany.StageScene
         int m_minute;
         /// <summary>残り秒数</summary>
         float m_seconds;
-        /// <summary></summary>
-        float m_totalSeconds;
         /// <summary>タイマーのスイッチングフラグ</summary>
         bool m_toggle;
 
@@ -75,6 +50,12 @@ namespace MowingPlanetCompany.StageScene
         private void Awake()
         {
             m_stageManager = StageManager.Instance;
+        }
+
+        // debug用
+        private void Start()
+        {
+            StartCountDown();
         }
 
         private void Update()
@@ -92,9 +73,18 @@ namespace MowingPlanetCompany.StageScene
         {
             m_minute = m_setMinute;
             m_seconds = m_setSeconds;
-            m_totalSeconds = m_setMinute * 60 + m_setSeconds; // 単位を秒に変換
         }
 
+        /// <summary>
+        /// 指定した時間で初期化
+        /// </summary>
+        /// <param name="minute"></param>
+        /// <param name="seconds"></param>
+        public void InitTimer(int minute,float seconds)
+        {
+            m_minute = minute;
+            m_seconds = seconds;
+        }
 
         /// <summary>
         /// カウントダウン開始
@@ -105,7 +95,22 @@ namespace MowingPlanetCompany.StageScene
             m_toggle = true;
 
             // =============
-            // カウントダウン開始時のイベントコール : Event Call that "OnStartCountDown()"
+            // Event call
+            // =============
+            if (OnStartCountDown != null)
+                OnStartCountDown();
+        }
+
+        /// <summary>
+        /// 時間を指定してカウントダウン開始
+        /// </summary>
+        public void StartCountDown(int minute, float seconds)
+        {
+            InitTimer(minute,seconds);
+            m_toggle = true;
+
+            // =============
+            // Event call
             // =============
             if (OnStartCountDown != null)
                 OnStartCountDown();
@@ -117,7 +122,7 @@ namespace MowingPlanetCompany.StageScene
         void DuringCountDown()
         {
             // =============
-            // カウントダウン中のイベントコール : Event Call that "OnDuringCountDown()"
+            // Event call
             // =============
             if (OnDuringCountDown != null)
                 OnDuringCountDown();
@@ -131,16 +136,21 @@ namespace MowingPlanetCompany.StageScene
                     m_seconds = 0;
                     DisplayText();
                     m_toggle = false;
-                    OnEndCountDown();
+
+                    // =============
+                    // Event call
+                    // =============
+                    if (OnEndCountDown != null)
+                        OnEndCountDown();
                 }
 
                 if (m_minute > 0)
                 {
                     m_minute--;
                     m_seconds += 60;
-                    DisplayText();
                 }
             }
+            DisplayText();
         }
 
         /// <summary>
