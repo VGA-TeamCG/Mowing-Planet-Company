@@ -6,5 +6,14 @@ namespace MowingPlanetCompany.StageScene
 {
     public class MinimapCamera : MonoBehaviour
     {
+        [Header("Components")]
+
+        [SerializeField] Transform m_playerPosition;
+
+        private void Update()
+        {
+
+            gameObject.transform.position = m_playerPosition.position;
+        }
     }
 }
