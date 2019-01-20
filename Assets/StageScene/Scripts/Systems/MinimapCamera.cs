@@ -13,7 +13,7 @@ namespace MowingPlanetCompany.StageScene
         private void Update()
         {
 
-            gameObject.transform.position = m_playerPosition.position;
+            transform.gameObject.transform.position = m_playerPosition.position;
         }
     }
 }
