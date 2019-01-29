@@ -15,9 +15,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     /// <summary>ジョイスティックの背景</summary>
     [Header("Components")]
-    public RectTransform background;
+    [SerializeField] protected RectTransform background;
     /// <summary>ジョイスティックのハンドル</summary>
-    public RectTransform handle;
+    [SerializeField] protected RectTransform handle;
 
     /// <summary>x成分</summary>
     public float Horizontal { get { return inputVector.x; } }

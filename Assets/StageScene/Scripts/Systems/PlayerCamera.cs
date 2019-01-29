@@ -43,6 +43,5 @@ public class PlayerCamera : MonoBehaviour
         m_cameraParent.rotation = Quaternion.Slerp(m_cameraParent.rotation, m_lookTarget.rotation, m_turnInterpolate); //カメラの向きをターゲットの向きへ滑らかに動かす
         m_camera.localRotation = Quaternion.Euler(m_offsetEulerAngle); // ターゲットに追従しているカメラの角度をここで任意にずらす
         m_camera.localPosition = m_offsetPosition; // 追従しているカメラの位置から任意の位置にずらす
-
     }
 }

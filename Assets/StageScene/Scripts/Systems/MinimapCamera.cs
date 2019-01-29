@@ -9,11 +9,14 @@ namespace MowingPlanetCompany.StageScene
         [Header("Components")]
 
         [SerializeField] Transform m_playerPosition;
+        [SerializeField] float m_offset = 10f;
+        Vector3 vec;
 
         private void Update()
         {
-
-            transform.gameObject.transform.position = m_playerPosition.position;
+            vec = m_playerPosition.position;
+            vec.y = vec.y + m_offset;
+            transform.gameObject.transform.position = vec;
         }
     }
 }
