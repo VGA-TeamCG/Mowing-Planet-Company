@@ -11,7 +11,7 @@ namespace MowingPlanetCompany.StageScene
     public class StageManager : MonoSingleton<StageManager>
     {
         /// <summary>State machine</summary>
-        public StateMachine m_StteMachine;
+        public StateMachine m_StateMachine;
         /// <summary>Custom UnityEvent</summary>
         public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
 
