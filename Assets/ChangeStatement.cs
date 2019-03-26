@@ -16,6 +16,8 @@ public class ChangeStatement : MonoBehaviour
     {
         receipt = GameObject.Find("Receipt");
         detailedStatement = GameObject.Find("DetailedStatement");
+        receipt.GetComponent<Canvas>().enabled = true;
+        detailedStatement.GetComponent<Canvas>().enabled = false;
     }
 
     public void Change()
