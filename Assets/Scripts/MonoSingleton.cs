@@ -7,6 +7,7 @@ namespace MowingPlanetCompany
     /// </summary>
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
+
         /// <summary>
         /// The instance.
         /// </summary>
@@ -41,13 +42,11 @@ namespace MowingPlanetCompany
                         Debug.LogError("Problem during the creation of " + typeName, gameObject);
                     }
                 }
-                else // instanceが見つけられたらInitializeを呼ぶ
-                {
-                    Initialize(instance);
-                }
+                Initialize(instance);
                 return m_instance;
             }
         }
+
 
         /// <summary>
         /// Initialize the specified instance.
