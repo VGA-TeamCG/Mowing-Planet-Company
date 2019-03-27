@@ -27,6 +27,7 @@ public class ScoreController : MonoBehaviour
     /// <summary> シーン遷移してもこのオブジェクトが破棄されないようにする </summary>
     private void Start()
     {
+        // このGameObjectを破棄しないようにする
         DontDestroyOnLoad(gameObject);
     }
 
@@ -45,6 +46,7 @@ public class ScoreController : MonoBehaviour
     /// <summary> リザルト画面でスコア処理をした後にこの関数を呼び、破棄する </summary>
     public void Destroy()
     {
+        // このGameObjectを破棄する
         Destroy(gameObject);
     }
 }

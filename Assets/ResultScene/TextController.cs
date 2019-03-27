@@ -30,10 +30,10 @@ public class TextController : MonoBehaviour
     /// <summary> 明細書の合計テキスト </summary>
     [SerializeField] Text m_sum;
 
-    // Use this for initialization
     void Start ()
     {
-        // フィールドの初期値  何も数値が渡されなかったらここで指定した数値が表示される
+        // フィールドの初期値  
+        // 何も数値が渡されなかったらここで指定した数値が表示される
         m_number.text = "No. " + "00";
         m_date.text = DateTime.Now.ToString("yyyy年MM月dd日");
         m_companyName.text = "MowingPlanetCompany";
@@ -45,5 +45,10 @@ public class TextController : MonoBehaviour
         m_timeBonus.text = "タイムボーナス : " + "100" + " p " + " × " + "000.0" + " 秒" + " = " + "00000" + " p";
         m_comboBonus.text = "コンボボーナス : " + "00" + " p " + " × " + "000" + " コンボ " + " = " + "00000" + " p";
         m_sum.text = "合計 : " + "000000" + " p";
+    }
+
+    public void SetValue()
+    {
+
     }
 }
