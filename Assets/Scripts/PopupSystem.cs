@@ -76,10 +76,12 @@ namespace MowingPlanetCompany
         /// </summary>
         public void Close()
         {
-            //iTween.ScaleTo(popupObject, iTween.Hash("scale", new Vector3(1f,0f,0f), "time", scalingTime));
-            //Destroy(canvasObject,scalingTime);
-
+#if true
+            iTween.ScaleTo(popupObject, iTween.Hash("scale", new Vector3(1f, 0f, 0f), "time", scalingTime));
+            Destroy(canvasObject, scalingTime);
+#else
             Destroy(canvasObject);
+#endif
         }
     }
 }

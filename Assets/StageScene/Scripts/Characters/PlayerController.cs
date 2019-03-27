@@ -18,6 +18,8 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] float m_jumpPower = 10f;
         // 重力加速度を調整するパラメーター
         [SerializeField] float m_gravityMultiplier = 1f;
+        /// <summary>鎌のコライダ</summary>
+        [SerializeField] BoxCollider scytheCollider;
 
 
 
@@ -48,6 +50,7 @@ namespace MowingPlanetCompany.StageScene
             m_anim = GetComponent<Animator>();
             m_charaCtrl = GetComponent<CharacterController>();
             m_timeManager = TimeManager.Instance;
+            scytheCollider.enabled = false;
         }
 
         private void Move()
@@ -107,6 +110,15 @@ namespace MowingPlanetCompany.StageScene
         public void OnAttack()
         {
             m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
+        }
+
+        public void ActiveCollider()
+        {
+            scytheCollider.enabled = true;
+        }
+        public void DesableCollider()
+        {
+            scytheCollider.enabled = false;
         }
         #endregion
     }

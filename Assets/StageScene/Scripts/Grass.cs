@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grass : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace MowingPlanetCompany.StageScene
+{
+    public class Grass : MonoBehaviour
+    {
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Weapon")
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }
