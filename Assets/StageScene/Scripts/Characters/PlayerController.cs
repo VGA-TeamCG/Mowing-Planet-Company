@@ -5,12 +5,13 @@ using UnityEngine;
 namespace MowingPlanetCompany.StageScene
 {
 
-    public class PlayerController : MovingObject, ICommandHandler
+    public class PlayerController : MonoSingleton<PlayerController>, ICommandHandler
     {
         #region Field
         [Header("Parameters")]
+
         /// <summary>移動速度を調整するパラメータ</summary>
-        [SerializeField] float m_moveSpeed = 5f;
+        [SerializeField] protected float m_moveSpeed = 5f;
         /// <summary>プレイヤーが回転する速度</summary>
         [SerializeField] float m_turnSpeed = 8f;
         /// <summary>ジャンプ力を調整するパラメータ</summary>
@@ -19,11 +20,16 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] float m_gravityMultiplier = 1f;
 
 
+
         [Header("Components")]
+
+        /// <summary>同じオブジェクトに追加された CharacterController への参照</summary>
+        protected CharacterController m_charaCtrl;
         /// <summary>操作の標準とする向き</summary>
         [SerializeField] Transform m_directionalStandard;
         /// <summary>浮動ジョイスティック</summary>
         [SerializeField] FloatingJoystick m_FJoyStick;
+        TimeManager m_timeManager;
 
 
         /// <summary>同じオブジェクトに追加された Animator への参照</summary>
@@ -37,13 +43,14 @@ namespace MowingPlanetCompany.StageScene
 
         #endregion
         #region Method
-        protected override void Start()
+        private void Awake()
         {
             m_anim = GetComponent<Animator>();
-            base.Start();
+            m_charaCtrl = GetComponent<CharacterController>();
+            m_timeManager = TimeManager.Instance;
         }
 
-        protected override void Move()
+        private void Move()
         {
             //方向の入力を取得する
             float h = (Input.GetAxis("Horizontal") == 0f) ? m_FJoyStick.Horizontal : Input.GetAxis("Horizontal"); //方向キーの入力が無い時はジョイスティックから入力をとる
