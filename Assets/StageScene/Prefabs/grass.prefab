@@ -22,9 +22,11 @@ GameObject:
   - component: {fileID: 33055206690955630}
   - component: {fileID: 23930154553635982}
   - component: {fileID: 114504555418360968}
+  - component: {fileID: 136220723720007790}
+  - component: {fileID: 114293346543544446}
   m_Layer: 0
   m_Name: grass
-  m_TagString: Untagged
+  m_TagString: NormalGrass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,9 +37,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052586951234748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.60145, y: 0.42282, z: 1.4244}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.66555405, y: 0.15, z: -3.1482615}
+  m_LocalScale: {x: 50, y: 75, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,6 +86,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052586951234748}
   m_Mesh: {fileID: 4300000, guid: 9fe27c8e9e60dfc44aee41dc7c16c35d, type: 3}
+--- !u!114 &114293346543544446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052586951234748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0b7c05be4ac45468d6e5438f5c89d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 
+  loadToColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114504555418360968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,4 +112,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config:
     Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    Color: {r: 1, g: 1, b: 1, a: 1}
+    Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+--- !u!136 &136220723720007790
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052586951234748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.008
+  m_Height: 0.012570571
+  m_Direction: 1
+  m_Center: {x: -0.0001340718, y: -0.0026479333, z: 0.0000000018626451}
