@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Setting.unity
     guid: 2f85591fc67953d4e8a5582fceea5744
+  - enabled: 1
+    path: Assets/Scenes/HeavenlyBody.unity
+    guid: 4123cf6e7f4f582488bc324e2755e66f
   m_configObjects: {}
