@@ -26,12 +26,6 @@ namespace MowingPlanetCompany.StageScene
             // 鎌のコライダーをDesableにする
             scytheCollider.enabled = false;
             beforeMainNodePosition = mainNode.position;
-            var animBehaviours = GetComponent<Animator>().GetBehaviours<AnimBehaviour>();
-            foreach (var behaviour in animBehaviours)
-            {
-                behaviour.SetStateEnterEvent(StoreBeforePosition);
-                behaviour.SetStateExitEvent(PositionCorrection);
-            }
         }
 
         /// <summary>
@@ -52,28 +46,28 @@ namespace MowingPlanetCompany.StageScene
             scytheCollider.enabled = false;
         }
 
-        /// <summary>
-        /// アニメーションが始まったフレームのmain nodeの座標を代入
-        /// </summary>
-        public void StoreBeforePosition()
-        {
-            Debug.Log(" StoreBeforePosition");
-            beforeMainNodePosition = mainNode.position;
-        }
+        ///// <summary>
+        ///// アニメーションが始まったフレームのmain nodeの座標を代入
+        ///// </summary>
+        //public void StoreBeforePosition()
+        //{
+        //    Debug.Log(" StoreBeforePosition");
+        //    beforeMainNodePosition = mainNode.position;
+        //}
 
-        /// <summary>
-        /// アニメーションが終わる時にアニメ開始前との差分を取り、ずれた座標の修正を行う
-        /// </summary>
-        public void PositionCorrection()
-        {
-            Debug.Log(" PositionCorrection");
-            var offset = mainNode.position - beforeMainNodePosition;
-            offset = new Vector3(0f, 0f, offset.z);
-            Debug.Log(mainNode.position);
-            mainNode.position -= offset;
-            Debug.Log(mainNode.position);
-            gameObject.transform.position += offset *interpolate;
-        }
+        ///// <summary>
+        ///// アニメーションが終わる時にアニメ開始前との差分を取り、ずれた座標の修正を行う
+        ///// </summary>
+        //public void PositionCorrection()
+        //{
+        //    Debug.Log(" PositionCorrection");
+        //    var offset = mainNode.position - beforeMainNodePosition;
+        //    offset = new Vector3(0f, 0f, offset.z);
+        //    Debug.Log(mainNode.position);
+        //    mainNode.position -= offset;
+        //    Debug.Log(mainNode.position);
+        //    gameObject.transform.position += offset;
+        //}
         #endregion
     }
 }

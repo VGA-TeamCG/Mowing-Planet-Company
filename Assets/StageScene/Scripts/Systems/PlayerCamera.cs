@@ -49,13 +49,6 @@ namespace MowingPlanetCompany.StageScene
             m_cameraParent.rotation = Quaternion.Slerp(m_cameraParent.rotation, m_lookTarget.rotation, m_turnInterpolate); //カメラの向きをターゲットの向きへ滑らかに動かす
             m_camera.localRotation = Quaternion.Euler(m_offsetEulerAngle); // ターゲットに追従しているカメラの角度をここで任意にずらす
             m_camera.localPosition = m_offsetPosition; // 追従しているカメラの位置から任意の位置にずらす
-
-            if (mowieAnim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.SecondCombo.ToString())
-                || mowieAnim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.FirstCombo.ToString())
-                || mowieAnim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.ThirdCombo.ToString()))
-            {
-                m_cameraParent.position = Vector3.Slerp(m_cameraParent.position, mainNode.position, m_positionInterpolate); //カメラの座標をターゲットの座標へ滑らかに動かす
-            }
         }
     }
 }
