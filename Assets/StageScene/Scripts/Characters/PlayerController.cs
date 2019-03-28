@@ -107,7 +107,11 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         public void OnAttack()
         {
-            m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
+            // 3連撃目ではない時Triggerをセットする　
+            if (!m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.ThirdCombo.ToString()))
+            {
+                m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
+            }
         }
 
 

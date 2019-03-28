@@ -25,7 +25,6 @@ namespace MowingPlanetCompany.StageScene
         {
             // 鎌のコライダーをDesableにする
             scytheCollider.enabled = false;
-            beforeMainNodePosition = mainNode.position;
         }
 
         /// <summary>
