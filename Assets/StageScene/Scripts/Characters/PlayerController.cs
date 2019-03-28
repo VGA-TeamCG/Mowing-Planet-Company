@@ -18,8 +18,7 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] float m_jumpPower = 10f;
         // 重力加速度を調整するパラメーター
         [SerializeField] float m_gravityMultiplier = 1f;
-        /// <summary>鎌のコライダ</summary>
-        [SerializeField] BoxCollider scytheCollider;
+
 
 
 
@@ -50,7 +49,6 @@ namespace MowingPlanetCompany.StageScene
             m_anim = GetComponent<Animator>();
             m_charaCtrl = GetComponent<CharacterController>();
             m_timeManager = TimeManager.Instance;
-            scytheCollider.enabled = false;
         }
 
         private void Move()
@@ -64,9 +62,9 @@ namespace MowingPlanetCompany.StageScene
             dir += new Vector3(h, 0, v) * m_moveSpeed; // 方向の入力で、x-z平面の移動方向が決まる。
 
             if (dir != Vector3.zero //移動の入力がされている、且つ攻撃モーションではない時
-                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.LeftAttack.ToString())
-                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.RightAttack.ToString())
-                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.UpperAttack.ToString())
+                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.SecondCombo.ToString())
+                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.FirstCombo.ToString())
+                && !m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.ThirdCombo.ToString())
                 )
             {
                 dir = m_directionalStandard.TransformDirection(dir);//カメラに対して正面の向きに変換する
@@ -112,14 +110,17 @@ namespace MowingPlanetCompany.StageScene
             m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
         }
 
-        public void ActiveCollider()
-        {
-            scytheCollider.enabled = true;
-        }
-        public void DesableCollider()
-        {
-            scytheCollider.enabled = false;
-        }
+
+
+
         #endregion
+        public enum AnimationStates
+        {
+            FirstCombo,
+            SecondCombo,
+            ThirdCombo,
+            Idle,
+            Run,
+        }
     }
 }

@@ -93,3 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerPosition: {fileID: 0}
+  m_offset: 10

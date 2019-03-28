@@ -6,9 +6,9 @@ namespace MowingPlanetCompany.StageScene
 {
     public class Grass : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if(collision.gameObject.tag == "Weapon")
+            if (other.gameObject.tag == "Weapon")
             {
                 Destroy(gameObject);
             }

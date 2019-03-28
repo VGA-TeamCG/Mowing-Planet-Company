@@ -5,7 +5,7 @@
     /// </summary>
     public enum AnimState
     {
-        RightAttack, LeftAttack, UpperAttack, Jump
+        FirstCombo, SecondCombo, ThirdCombo, Jump
     }
 
     /// <summary>
