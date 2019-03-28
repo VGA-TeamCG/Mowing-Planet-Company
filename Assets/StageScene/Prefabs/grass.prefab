@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114293346543544446}
   - component: {fileID: 114895223696486256}
   - component: {fileID: 54688280876199864}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: grass
   m_TagString: NormalGrass
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4098414010097330}
   - component: {fileID: 198704532198617718}
   - component: {fileID: 199614304969708644}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,9 +179,9 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052586951234748}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.008
+  m_Radius: 0.013
   m_Height: 0.012570571
   m_Direction: 1
   m_Center: {x: -0.0001340718, y: -0.0026479333, z: 0.0000000018626451}
