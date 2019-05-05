@@ -23,9 +23,9 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>パクパク花のスコア</summary>
         public int PakupakuFlowerScore { get; set; }
         /// <summary>ツキツキ樹の一体毎のポイント</summary>
-        public int TukiTukiWoodPerPoint { get; set; }
+        public int TsukiTsukiWoodPerPoint { get; set; }
         /// <summary>ツキツキ樹のスコア</summary>
-        public int TukiTukiWoodScore { get; set; }
+        public int TsukiTsukiWoodScore { get; set; }
         /// <summary>タイム(現状１秒)毎のポイント</summary>
         public int TimePerPoint { get; set; }
         /// <summary>タイムスコア</summary>
@@ -36,6 +36,14 @@ namespace MowingPlanetCompany.StageScene
         public int ComboScore { get; set; }
         /// <summary>トータルスコア</summary>
         public int TotalScore { get; set; }
+        #endregion
+
+        #region Methods
+        //public void AddScore
+        #endregion
+
+        #region Enums
+
         #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace MowingPlanetCompany.StageScene
             // Register event
             m_stageManager.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != StageManager.StateMachine.State.InitGame)
+                if(state != StateMachine.States.State.InitGame)
                 {
                     return;
                 }
