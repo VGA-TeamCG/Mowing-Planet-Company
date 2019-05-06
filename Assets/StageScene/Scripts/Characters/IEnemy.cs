@@ -1,18 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using UnityEngine.EventSystems;
 
-public class IEnemy : MonoBehaviour
+namespace MowingPlanetCompany.StageScene
 {
-
-    // Use this for initialization
-    void Start()
+    public interface IEnemy
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        void OnCollideAttack();
+        void OnCollidePlayer();
     }
 }
