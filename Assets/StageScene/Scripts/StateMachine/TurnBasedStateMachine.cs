@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
     /// <summary>
     /// StateMachine.
     /// </summary>
-    public class StateMachine : MonoSingleton<StateMachine>
+    public class TurnBasedStateMachine : MonoSingleton<TurnBasedStateMachine>
     {
         /// <summary>State machine</summary>
         public States m_StateMachine;

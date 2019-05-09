@@ -32,7 +32,7 @@ namespace MowingPlanetCompany.StageScene
 
         [Header("Components")]
 
-        StateMachine m_stageManager;
+        TurnBasedStateMachine m_stageManager;
         /// <summary>残り時間を表示するテキスト</summary>
         [SerializeField] Text m_timerText;
 
@@ -49,7 +49,7 @@ namespace MowingPlanetCompany.StageScene
 
         private void Awake()
         {
-            m_stageManager = StateMachine.Instance;
+            m_stageManager = TurnBasedStateMachine.Instance;
         }
 
         // debug用
