@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
     /// 
     /// </summary>
     /// <typeparam name="T">各草クラス.</typeparam>
-    public class GrassesBase<T> : StatefulObjectBase<T, GrassState> where T : class
+    public abstract class GrassesBase<T> : StatefulObjectBase<T, GrassState> where T : class
     {
         #region Properties
         public GrassStatus Status { get { return status; } set { status = value; } }
@@ -36,6 +36,13 @@ namespace MowingPlanetCompany.StageScene
             status.Initialize();
         }
 
+        protected override void Update()
+        {
+            base.Update();
+            var adjustRot = new Quaternion(0f, transform.rotation.y, 0f, transform.rotation.w);
+            transform.rotation = adjustRot;
+        }
+
         /// <summary>
         /// Colliderと衝突した時のコールバック
         /// </summary>
@@ -48,8 +55,6 @@ namespace MowingPlanetCompany.StageScene
                 OnCollideWeapon();
             }
         }
-
-
 
         /// <summary>
         /// on collide weapon of player
@@ -66,46 +71,148 @@ namespace MowingPlanetCompany.StageScene
         #endregion
 
         #region EachStateBehaviour
-        protected class StateWander<T> : State<T> where T : class
+        protected class StateWander<T> : State<T> where T : GrassesBase<T>
         {
             public StateWander(T owner) : base(owner) { }
+            Vector3 targetPosition;
 
-            public override void Enter() { }
-            public override void Excute() { }
+            public override void Enter()
+            {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+                targetPosition = GetRandomPositionOnLevel();
+            }
+            public override void Excute()
+            {
+                // プレイヤーとの距離が小さければ追跡ステートに遷移
+                var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
+                if (sqrDistanceToPlayer < owner.status.PursuitSqrDistance - owner.status.Margin)
+                {
+                    //  change state.
+                    owner.ChangeState(GrassState.Pursuit);
+                }
+
+                // 目標地点との距離が小さければ、次のランダムな目標地点を設定する
+                var sqrDistanceToTarget = Vector3.SqrMagnitude(owner.transform.position - targetPosition);
+                if (sqrDistanceToTarget < owner.status.ChangeTargetSqrDistance)
+                {
+                    targetPosition = GetRandomPositionOnLevel();
+                }
+
+                // look at target position
+                var targetRotation = Quaternion.LookRotation(targetPosition - owner.transform.position);
+                owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * owner.status.RotationSmooth);
+
+                // go to straight
+                owner.transform.Translate(Vector3.forward * owner.status.Speed * Time.deltaTime);
+            }
             public override void Exit() { }
+
+            /// <summary>
+            /// 指定半径内の座標をランダムに返す
+            /// </summary>
+            /// <returns></returns>
+            public Vector3 GetRandomPositionOnLevel()
+            {
+                var radius = owner.status.ActivityRange;
+                return new Vector3(Random.Range(-radius, radius), 0f, Random.Range(-radius, radius));
+            }
         }
-        protected class StateAttack<T> : State<T> where T : class
+        protected class StateAttack<T> : State<T> where T : GrassesBase<T>
         {
             public StateAttack(T owner) : base(owner) { }
 
-            public override void Enter() { }
-            public override void Excute() { }
+            public override void Enter()
+            {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+            }
+            public override void Excute()
+            {
+                // Playerとの距離が大きければ追跡ステートに遷移
+                var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
+                if (sqrDistanceToPlayer > owner.status.AttackSqrDistance + owner.status.Margin)
+                {
+                    owner.ChangeState(GrassState.Pursuit);
+                }
+                Debug.Log("Attackしたよ");
+            }
             public override void Exit() { }
         }
-        protected class StateEscape<T> : State<T> where T : class
+        protected class StateEscape<T> : State<T> where T : GrassesBase<T>
         {
             public StateEscape(T owner) : base(owner) { }
 
-            public override void Enter() { }
-            public override void Excute() { }
+            public override void Enter()
+            {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+            }
+            public override void Excute()
+            {
+                var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.player.position - owner.transform.position);
+                if (sqrDistanceToPlayer > owner.status.EscapeSqrDistance - owner.status.Margin)
+                {
+                    owner.ChangeState(GrassState.Wander);
+                }
+
+                // look at target position
+                var targetRotation = Quaternion.LookRotation(owner.player.position - owner.transform.position);
+                owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * owner.status.RotationSmooth);
+
+                // go to straight
+                owner.transform.Translate(Vector3.forward * owner.status.Speed * Time.deltaTime);
+            }
             public override void Exit() { }
         }
-        protected class StateDestroy<T> : State<T> where T : class
+        protected class StateDestroy<T> : State<T> where T : GrassesBase<T>
         {
             public StateDestroy(T owner) : base(owner) { }
 
             public override void Enter()
             {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+                // 上方ベクトルとランダムなベクトル方向に飛ばす
+                var force = Vector3.up * owner.HeightPower + Random.insideUnitSphere * owner.SpherePower;
+                owner.GetComponent<Rigidbody>().AddForce(force);
 
+                // 指定秒数遅延後オブジェクト破壊
+                Destroy(owner.gameObject, owner.DestoryDelayTime);
             }
             public override void Excute() { }
             public override void Exit() { }
         }
-        protected class StatePursuit<T> : State<T> where T : class
+        protected class StatePursuit<T> : State<T> where T : GrassesBase<T>
         {
             public StatePursuit(T owner) : base(owner) { }
 
-            public override void Enter() { }
+            public override void Enter()
+            {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+            }
+            public override void Excute()
+            {
+                var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.player.position - owner.transform.position);
+                if (sqrDistanceToPlayer > owner.status.PursuitSqrDistance - owner.status.Margin)
+                {
+                    owner.ChangeState(GrassState.Wander);
+                }
+
+                // look at target position
+                var targetRotation = Quaternion.LookRotation(owner.player.position - owner.transform.position);
+                owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * owner.status.RotationSmooth);
+
+                // go to straight
+                owner.transform.Translate(Vector3.forward * owner.status.Speed * Time.deltaTime);
+            }
+            public override void Exit() { }
+        }
+
+        protected class StatePause<T> : State<T> where T : GrassesBase<T>
+        {
+            public StatePause(T owner) : base(owner) { }
+
+            public override void Enter()
+            {
+                Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
+            }
             public override void Excute() { }
             public override void Exit() { }
         }

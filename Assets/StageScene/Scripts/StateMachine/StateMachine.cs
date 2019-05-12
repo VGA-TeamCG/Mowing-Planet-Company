@@ -5,7 +5,7 @@ namespace MowingPlanetCompany.StageScene
 {
     public class StateMachine<T>
     {
-        private State<T> currentState;
+        State<T> currentState;
 
         public StateMachine()
         {

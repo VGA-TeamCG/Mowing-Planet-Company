@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
         where T : class where TEnum : System.IConvertible
     {
         protected List<State<T>> stateList = new List<State<T>>();
-        protected StateMachine<T> stateMachine;
+        protected StateMachine<T> stateMachine=new StateMachine<T>();
 
         public virtual void ChangeState(TEnum state)
         {
@@ -16,7 +16,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 return;
             }
-
+            Debug.Log(string.Format("go is {0}. state index is {1}", gameObject.name,state.ToInt32(null).ToString()));
             stateMachine.ChangeState(stateList[state.ToInt32(null)]);
         }
 

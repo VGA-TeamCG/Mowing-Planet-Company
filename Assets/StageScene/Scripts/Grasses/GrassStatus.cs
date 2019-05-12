@@ -16,15 +16,15 @@ namespace MowingPlanetCompany.StageScene
         public float ActivityRange { get { return activityRange; } set { activityRange = value; } }
         /// <summary>追跡に遷移するかどうかを判断する距離(2乗)</summary>
         public float PursuitSqrDistance { get { return pursuitSqrDistance; } set { pursuitSqrDistance = value; } }
-        /// <summary></summary>
+        /// <summary>攻撃ステート用範囲</summary>
         public float AttackSqrDistance { get { return attackSqrDistance; } set { attackSqrDistance = value; } }
-        /// <summary></summary>
+        /// <summary>範囲マージン</summary>
         public float Margin { get { return margin; } set { margin = value; } }
-        /// <summary></summary>
+        /// <summary>徘徊ステート時のターゲット変更距離</summary>
         public float ChangeTargetSqrDistance { get { return changeTargetSqrDistance; } set { changeTargetSqrDistance = value; } }
-        /// <summary></summary>
+        /// <summary>キャラ回転の補間レート</summary>
         public float RotationSmooth { get { return rotationSmooth; } set { rotationSmooth = value; } }
-        /// <summary></summary>
+        /// <summary>逃走ステート用範囲</summary>
         public float EscapeSqrDistance { get { return escapeSqrDistance; } set { escapeSqrDistance = value; } }
 
 
@@ -36,17 +36,17 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] protected GrassID grassID;
         [Header("有用半径")]
         [SerializeField] float activityRange;
-        [Header("")]
+        [Header("追跡ステート用範囲")]
         [SerializeField] float pursuitSqrDistance;
-        [Header("")]
+        [Header("攻撃ステート用範囲")]
         [SerializeField] float attackSqrDistance;
-        [Header("")]
+        [Header("逃走ステート用範囲")]
         [SerializeField] float escapeSqrDistance;
-        [Header("")]
+        [Header("範囲マージン")]
         [SerializeField] float margin;
-        [Header("")]
+        [Header("徘徊ステート時のターゲット変更距離")]
         [SerializeField] float changeTargetSqrDistance;
-        [Header("")]
+        [Header("キャラ回転の補間レート")]
         [SerializeField] float rotationSmooth;
     }
 }
