@@ -2178,8 +2178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scytheCollider: {fileID: 65657237223027782}
   mainNode: {fileID: 4759690004384146}
-  animBehaviour: {fileID: 114136213045955700, guid: 224b7b91f9f571f499f6b3d694b44562,
-    type: 2}
+  interpolate: 0
 --- !u!114 &114869990560217086
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,11 +10,4 @@ namespace MowingPlanetCompany.StageScene
 
     }
 
-    public enum GrassID
-    {
-        Normal,
-        Nigenige,
-        Pakupaku,
-        Tsukitsuki,
-    }
 }

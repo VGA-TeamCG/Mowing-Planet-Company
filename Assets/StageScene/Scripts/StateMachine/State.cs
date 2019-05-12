@@ -4,8 +4,8 @@ using System.Collections;
 public class State<T>
 {
     /// <summary>このステートを使用するインスタンス</summary>
-    protected T owner;
-    
+    public  T owner;
+
     /// <summary>
     /// 
     /// </summary>

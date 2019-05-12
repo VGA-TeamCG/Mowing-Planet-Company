@@ -4,32 +4,43 @@ using UnityEngine;
 
 namespace MowingPlanetCompany.StageScene
 {
-    abstract public class GrassesBase : MonoBehaviour, IMovable
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">各草クラス.</typeparam>
+    public class GrassesBase<T> : StatefulObjectBase<T, GrassState> where T : class
     {
         #region Properties
-        /// <summary>ノーマル草の一体毎のポイント</summary>
-        public int GrassPerPoint { get { return grassPerPoint; } set { grassPerPoint = value; } }
-        /// <summary>ノーマル草のスコア</summary>
-        public int GrassScore { get { return grassScore; } set { grassScore = value; } }
-        /// <summary>この草の識別子</summary>
-        public GrassID GrassId { get { return grassID; } set { grassID = value; } }
+        public GrassStatus Status { get { return status; } set { status = value; } }
+        public float HeightPower { get { return heightPower; } set { heightPower = value; } }
+        public float SpherePower { get { return spherePower; } set { spherePower = value; } }
+        public float DestoryDelayTime { get { return destroyDelayTime; } set { destroyDelayTime = value; } }
         #endregion
 
         #region Variables
-        [Header("ノーマル草の一体毎のポイント")]
-        [SerializeField] protected int grassPerPoint;
-        [Header("ノーマル草のスコア")]
-        [SerializeField] protected int grassScore;
-        [Header("この草の識別子")]
-        [SerializeField] protected GrassID grassID;
+        [SerializeField] protected GrassStatus status;
+        /// <summary>上に飛ばす強さ</summary>
+        [SerializeField] float heightPower;
+        /// <summary>球体上のランダムな方角に飛ばす強さ</summary>
+        [SerializeField] float spherePower;
+        /// <summary>破壊迄の遅延時間</summary>
+        [SerializeField] float destroyDelayTime = 1f;
+
+        protected Transform player;
         #endregion
 
         #region Methods
+        public virtual void Initialize()
+        {
+            player = GameObject.FindWithTag("Player").transform;
+            status.Initialize();
+        }
+
         /// <summary>
         /// Colliderと衝突した時のコールバック
         /// </summary>
         /// <param name="other"></param>
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             Debug.Log(other.gameObject.name);
             if (other.gameObject.tag == "Weapon")
@@ -38,18 +49,82 @@ namespace MowingPlanetCompany.StageScene
             }
         }
 
+
+
         /// <summary>
-        /// Mowieの武器と接触した時
+        /// on collide weapon of player
         /// </summary>
-        public abstract void OnCollideWeapon();
-        /// <summary>
-        /// 動く時
-        /// </summary>
-        public abstract void Move();
-        /// <summary>
-        /// 待機する時
-        /// </summary>
-        public abstract void Idle();
+        public virtual void OnCollideWeapon()
+        {
+            var damage = player.GetComponent<Mowie>().MyStatus.Atk;
+            status.Life -= damage;
+            if (status.Life <= 0)
+            {
+                ChangeState(GrassState.ToDie);
+            }
+        }
         #endregion
+
+        #region EachStateBehaviour
+        protected class StateWander<T> : State<T> where T : class
+        {
+            public StateWander(T owner) : base(owner) { }
+
+            public override void Enter() { }
+            public override void Excute() { }
+            public override void Exit() { }
+        }
+        protected class StateAttack<T> : State<T> where T : class
+        {
+            public StateAttack(T owner) : base(owner) { }
+
+            public override void Enter() { }
+            public override void Excute() { }
+            public override void Exit() { }
+        }
+        protected class StateEscape<T> : State<T> where T : class
+        {
+            public StateEscape(T owner) : base(owner) { }
+
+            public override void Enter() { }
+            public override void Excute() { }
+            public override void Exit() { }
+        }
+        protected class StateDestroy<T> : State<T> where T : class
+        {
+            public StateDestroy(T owner) : base(owner) { }
+
+            public override void Enter()
+            {
+
+            }
+            public override void Excute() { }
+            public override void Exit() { }
+        }
+        protected class StatePursuit<T> : State<T> where T : class
+        {
+            public StatePursuit(T owner) : base(owner) { }
+
+            public override void Enter() { }
+            public override void Excute() { }
+            public override void Exit() { }
+        }
+        #endregion
+    }
+    public enum GrassState
+    {
+        Wander,
+        Pursuit,
+        Attack,
+        Escape,
+        ToDie,
+    }
+
+    public enum GrassID
+    {
+        Normal,
+        Nigenige,
+        Pakupaku,
+        Tsukitsuki,
     }
 }
