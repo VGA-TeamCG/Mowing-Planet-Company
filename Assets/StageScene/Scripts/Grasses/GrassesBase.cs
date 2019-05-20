@@ -25,6 +25,7 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] float spherePower;
         /// <summary>破壊迄の遅延時間</summary>
         [SerializeField] float destroyDelayTime = 1f;
+        [SerializeField] protected GrassState currentState;
 
         protected Transform player;
         #endregion
@@ -39,8 +40,13 @@ namespace MowingPlanetCompany.StageScene
         protected override void Update()
         {
             base.Update();
+            // ===============================================
+            // 転倒防止。　動くかは要確認
+            // ===============================================
             var adjustRot = new Quaternion(0f, transform.rotation.y, 0f, transform.rotation.w);
             transform.rotation = adjustRot;
+
+            currentState = stateMachine.CurrentState.identity;
         }
 
         /// <summary>
@@ -71,9 +77,9 @@ namespace MowingPlanetCompany.StageScene
         #endregion
 
         #region EachStateBehaviour
-        protected class StateWander<T> : State<T> where T : GrassesBase<T>
+        protected class StateWander<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StateWander(T owner) : base(owner) { }
+            public StateWander(T owner,GrassState identity) : base(owner,identity) { }
             Vector3 targetPosition;
 
             public override void Enter()
@@ -117,9 +123,10 @@ namespace MowingPlanetCompany.StageScene
                 return new Vector3(Random.Range(-radius, radius), 0f, Random.Range(-radius, radius));
             }
         }
-        protected class StateAttack<T> : State<T> where T : GrassesBase<T>
+
+        protected class StateAttack<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StateAttack(T owner) : base(owner) { }
+            public StateAttack(T owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter()
             {
@@ -137,9 +144,10 @@ namespace MowingPlanetCompany.StageScene
             }
             public override void Exit() { }
         }
-        protected class StateEscape<T> : State<T> where T : GrassesBase<T>
+
+        protected class StateEscape<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StateEscape(T owner) : base(owner) { }
+            public StateEscape(T owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter()
             {
@@ -162,9 +170,10 @@ namespace MowingPlanetCompany.StageScene
             }
             public override void Exit() { }
         }
-        protected class StateDestroy<T> : State<T> where T : GrassesBase<T>
+
+        protected class StateDestroy<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StateDestroy(T owner) : base(owner) { }
+            public StateDestroy(T owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter()
             {
@@ -179,9 +188,9 @@ namespace MowingPlanetCompany.StageScene
             public override void Excute() { }
             public override void Exit() { }
         }
-        protected class StatePursuit<T> : State<T> where T : GrassesBase<T>
+        protected class StatePursuit<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StatePursuit(T owner) : base(owner) { }
+            public StatePursuit(T owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter()
             {
@@ -205,9 +214,9 @@ namespace MowingPlanetCompany.StageScene
             public override void Exit() { }
         }
 
-        protected class StatePause<T> : State<T> where T : GrassesBase<T>
+        protected class StatePause<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StatePause(T owner) : base(owner) { }
+            public StatePause(T owner,GrassState identity) : base(owner,identity) { }
 
             public override void Enter()
             {

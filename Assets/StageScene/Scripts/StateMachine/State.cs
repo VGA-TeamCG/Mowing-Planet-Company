@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MowingPlanetCompany.StageScene;
+using System;
 
-public class State<T>
+public class State<T,TEnum>
 {
     /// <summary>このステートを使用するインスタンス</summary>
     public  T owner;
+    /// <summary>識別子</summary>
+    public TEnum identity;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="owner"></param>
-    public State(T owner)
+    public State(T owner, TEnum identity)
     {
         this.owner = owner;
+        this.identity = identity;
     }
 
     /// <summary>

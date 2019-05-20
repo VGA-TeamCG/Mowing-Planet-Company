@@ -20,11 +20,12 @@ namespace MowingPlanetCompany.StageScene
         public override void Initialize()
         {
             base.Initialize();
-            stateList.Add(new MyStateWander(this));
-            stateList.Add(new MyStateEscape(this));
-            stateList.Add(new MyStateAttack(this));
-            stateList.Add(new MyStateDestory(this));
-            ChangeState(GrassState.Attack);
+            stateList.Add(new MyStateWander(this, GrassState.Wander));
+            stateList.Add(new MyStateEscape(this, GrassState.Escape));
+            stateList.Add(new MyStateAttack(this, GrassState.Attack));
+            stateList.Add(new MyStateDestory(this, GrassState.ToDie));
+            stateList.Add(new MyStatePursuit(this, GrassState.Pursuit));
+            ChangeState(GrassState.Pursuit);
         }
 
         protected override void Update()
@@ -38,7 +39,7 @@ namespace MowingPlanetCompany.StageScene
         private class MyStateWander : StateWander<NigenigeGrass>
         {
             Vector3 targetPosition;
-            public MyStateWander(NigenigeGrass owner) : base(owner) { }
+            public MyStateWander(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
             public override void Excute() { base.Excute(); }
@@ -50,7 +51,7 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         private class MyStateEscape : StateEscape<NigenigeGrass>
         {
-            public MyStateEscape(NigenigeGrass owner) : base(owner) { }
+            public MyStateEscape(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
             public override void Excute() { base.Excute(); }
@@ -62,7 +63,7 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         private class MyStateAttack : StateAttack<NigenigeGrass>
         {
-            public MyStateAttack(NigenigeGrass owner) : base(owner) { }
+            public MyStateAttack(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
             public override void Excute() { base.Excute(); }
@@ -74,7 +75,7 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         private class MyStateDestory : StateDestroy<NigenigeGrass>
         {
-            public MyStateDestory(NigenigeGrass owner) : base(owner) { }
+            public MyStateDestory(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
             public override void Excute() { base.Excute(); }
@@ -86,7 +87,7 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         private class MyStatePursuit : StatePursuit<NigenigeGrass>
         {
-            public MyStatePursuit(NigenigeGrass owner) : base(owner) { }
+            public MyStatePursuit(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
             public override void Excute() { base.Excute(); }

@@ -3,16 +3,16 @@ using System.Collections;
 
 namespace MowingPlanetCompany.StageScene
 {
-    public class StateMachine<T>
+    public class StateMachine<T, TEnum>
     {
-        State<T> currentState;
+        State<T, TEnum> currentState;
 
         public StateMachine()
         {
             currentState = null;
         }
 
-        public State<T> CurrentState
+        public State<T, TEnum> CurrentState
         {
             get
             {
@@ -20,7 +20,7 @@ namespace MowingPlanetCompany.StageScene
             }
         }
 
-        public void ChangeState(State<T> state)
+        public void ChangeState(State<T, TEnum> state)
         {
             if (currentState != null)
             {

@@ -1356,13 +1356,14 @@ MonoBehaviour:
     activityRange: 100
     pursuitSqrDistance: 100
     attackSqrDistance: 20
-    escapeSqrDistance: 80
+    escapeSqrDistance: 10
     margin: 0
     changeTargetSqrDistance: 0
     rotationSmooth: 0
   heightPower: 0
   spherePower: 0
   destroyDelayTime: 1
+  currentState: 0
 --- !u!54 &1432097621
 Rigidbody:
   m_ObjectHideFlags: 0
