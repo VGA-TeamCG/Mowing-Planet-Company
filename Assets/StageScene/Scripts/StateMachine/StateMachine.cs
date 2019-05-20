@@ -1,71 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
+using System.Collections;
 
 namespace MowingPlanetCompany.StageScene
 {
-    /// <summary>
-    /// StateMachine.
-    /// </summary>
-    public class StateMachine : MonoSingleton<StateMachine>
+    public class StateMachine<T>
     {
-        /// <summary>State machine</summary>
-        public States m_StateMachine;
-        /// <summary>Custom UnityEvent</summary>
-        public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
+        State<T> currentState;
 
-        /// <summary>
-        /// 指定したステートに遷移させてEventを発行する
-        /// </summary>
-        /// <param name="state">State machine.</param>
-        public void SetStateMachine(States.State state)
+        public StateMachine()
         {
-            // ステート遷移前のステートを保存 
-            m_StateMachine.PreviousState = m_StateMachine.NowState;
-            if (state == States.State.Pause ) // 遷移先がPauseステートの時保存
+            currentState = null;
+        }
+
+        public State<T> CurrentState
+        {
+            get
             {
-                m_StateMachine.StateBeforeWithoutSpecialState = m_StateMachine.NowState;
+                return currentState;
             }
-            m_StateMachine.NowState = state; // stateをセット
-
-            Debug.Log(state);
-            // ==================================
-            // イベント呼び出し
-            // ==================================
-            m_BehaviourByState.Invoke(state);
         }
 
-        /// <summary>
-        /// State machine event.
-        /// </summary>
-        public class StateMachineEvent : UnityEvent<States.State>
-        { 
-            public StateMachineEvent() { }
-        }
-
-        /// <summary>
-        /// State machine.
-        /// </summary>
-        public class States
+        public void ChangeState(State<T> state)
         {
-            /// <summary>Represents the current state.</summary>
-            public State NowState { get; set; }
-            public State PreviousState { get; set; }
-            public State StateBeforeWithoutSpecialState { get; set; } 
-
-            /// <summary>
-            /// States.
-            /// </summary>
-            public enum State
+            if (currentState != null)
             {
-                InitGame,
-                InTheGame,
-                GameOver,
-                GameClear,
-                Pause,
+                currentState.Exit();
+            }
+            currentState = state;
+            currentState.Enter();
+        }
+
+        public void Update()
+        {
+            if (currentState != null)
+            {
+                currentState.Excute();
             }
         }
     }
 }
-

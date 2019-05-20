@@ -10,13 +10,13 @@ namespace MowingPlanetCompany.StageScene
     public class StateBehaviourBase : MonoBehaviour
     {
         /// <summary></summary>
-        protected StateMachine m_stageManager;
+        protected TurnBasedStateMachine m_stageManager;
         /// <summary></summary>
         protected PlayerController m_playerController;
 
         protected virtual void Awake()
         {
-            m_stageManager = StateMachine.Instance;
+            m_stageManager = TurnBasedStateMachine.Instance;
             m_playerController = PlayerController.Instance;
         }
     }
