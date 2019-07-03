@@ -28,10 +28,6 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] float m_turnInterpolate = .05f;
         /// <summary>追従するカメラの向きに角度をつけるパラメータ</summary>
         [SerializeField] Vector2 m_offsetEulerAngle;
-        /// <summary>animator of mowie</summary>
-        [SerializeField] Animator mowieAnim;
-        /// <summary>mn_c_main node of mowie</summary>
-        [SerializeField] Transform mainNode;
 
 
 

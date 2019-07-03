@@ -42,7 +42,7 @@ namespace MowingPlanetCompany.StageScene
             public MyStateWander(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
-            public override void Excute() { base.Excute(); }
+            public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
 
@@ -54,7 +54,7 @@ namespace MowingPlanetCompany.StageScene
             public MyStateEscape(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
-            public override void Excute() { base.Excute(); }
+            public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
 
@@ -66,7 +66,7 @@ namespace MowingPlanetCompany.StageScene
             public MyStateAttack(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
-            public override void Excute() { base.Excute(); }
+            public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
 
@@ -78,7 +78,7 @@ namespace MowingPlanetCompany.StageScene
             public MyStateDestory(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
-            public override void Excute() { base.Excute(); }
+            public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
 
@@ -90,7 +90,7 @@ namespace MowingPlanetCompany.StageScene
             public MyStatePursuit(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter() { base.Enter(); }
-            public override void Excute() { base.Excute(); }
+            public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
     }

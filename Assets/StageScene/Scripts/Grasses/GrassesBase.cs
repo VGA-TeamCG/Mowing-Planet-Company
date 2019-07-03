@@ -87,7 +87,7 @@ namespace MowingPlanetCompany.StageScene
                 Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
                 targetPosition = GetRandomPositionOnLevel();
             }
-            public override void Excute()
+            public override void Execute()
             {
                 // プレイヤーとの距離が小さければ追跡ステートに遷移
                 var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
@@ -132,7 +132,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
             }
-            public override void Excute()
+            public override void Execute()
             {
                 // Playerとの距離が大きければ追跡ステートに遷移
                 var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
@@ -153,7 +153,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
             }
-            public override void Excute()
+            public override void Execute()
             {
                 var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.player.position - owner.transform.position);
                 if (sqrDistanceToPlayer > owner.status.EscapeSqrDistance - owner.status.Margin)
@@ -185,7 +185,7 @@ namespace MowingPlanetCompany.StageScene
                 // 指定秒数遅延後オブジェクト破壊
                 Destroy(owner.gameObject, owner.DestoryDelayTime);
             }
-            public override void Excute() { }
+            public override void Execute() { }
             public override void Exit() { }
         }
         protected class StatePursuit<T> : State<T, GrassState> where T : GrassesBase<T>
@@ -196,7 +196,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
             }
-            public override void Excute()
+            public override void Execute()
             {
                 var sqrDistanceToPlayer = Vector3.SqrMagnitude(owner.player.position - owner.transform.position);
                 if (sqrDistanceToPlayer > owner.status.PursuitSqrDistance - owner.status.Margin)
@@ -222,7 +222,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 Debug.Log(string.Format("owner is {0}. currentState is {1}.", owner.gameObject.name, owner.stateMachine.CurrentState));
             }
-            public override void Excute() { }
+            public override void Execute() { }
             public override void Exit() { }
         }
         #endregion
