@@ -1173,6 +1173,16 @@ Prefab:
       propertyPath: m_turnSpeed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 137181627791614408, guid: 561505ca8d1f9b148b6f63dbf44fe921,
+        type: 2}
+      propertyPath: m_SkinnedMotionVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137181627791614408, guid: 561505ca8d1f9b148b6f63dbf44fe921,
+        type: 2}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561505ca8d1f9b148b6f63dbf44fe921, type: 2}
   m_IsPrefabAsset: 0
