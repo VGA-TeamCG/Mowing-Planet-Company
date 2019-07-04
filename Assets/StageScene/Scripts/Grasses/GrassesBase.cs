@@ -28,9 +28,14 @@ namespace MowingPlanetCompany.StageScene
         [SerializeField] protected GrassState currentState;
 
         protected Transform player;
+        protected TimeManager timeManager;
         #endregion
 
         #region Methods
+        protected virtual void Awake()
+        {
+            timeManager = TimeManager.Instance;
+        }
         public virtual void Initialize()
         {
             player = GameObject.FindWithTag("Player").transform;
@@ -79,7 +84,7 @@ namespace MowingPlanetCompany.StageScene
         #region EachStateBehaviour
         protected class StateWander<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StateWander(T owner,GrassState identity) : base(owner,identity) { }
+            public StateWander(T owner, GrassState identity) : base(owner, identity) { }
             Vector3 targetPosition;
 
             public override void Enter()
@@ -216,7 +221,7 @@ namespace MowingPlanetCompany.StageScene
 
         protected class StatePause<T> : State<T, GrassState> where T : GrassesBase<T>
         {
-            public StatePause(T owner,GrassState identity) : base(owner,identity) { }
+            public StatePause(T owner, GrassState identity) : base(owner, identity) { }
 
             public override void Enter()
             {

@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: groundmat
   m_Shader: {fileID: 4800000, guid: 6b0cc31d67e392b43b8ded1fbe432302, type: 3}
   m_ShaderKeywords: 
@@ -39,11 +40,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Grass:
-        m_Texture: {fileID: 2800000, guid: 34e29c321c7e19e4ba703f298a8edcbb, type: 3}
+        m_Texture: {fileID: 2800000, guid: ffacf3898c5f9964b88e48a8d773c222, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassMask:
-        m_Texture: {fileID: 2800000, guid: d3b6b808cee837747a901c4d0df62b2b, type: 3}
+        m_Texture: {fileID: 2800000, guid: abd44b345f502984a9373210fee03d6f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ground:

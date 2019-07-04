@@ -2,15 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageManager : MonoBehaviour {
+namespace MowingPlanetCompany.StageScene
+{
+    public class StageManager : MonoSingleton<StageManager>
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        #region Properties
+        #endregion
+        #region Variables
+        TimeManager timeManager;
+        #endregion
+        #region Methods
+        void StartGame()
+        {
+            timeManager.StartCountDown();
+        }
+        #endregion
+        #region Callbacks
+        private void Awake()
+        {
+            timeManager = TimeManager.Instance;
+        }
+        private void Start()
+        {
+            StartGame();
+        }
+        #endregion
+        #region Enums
+        #endregion
+    }
 }

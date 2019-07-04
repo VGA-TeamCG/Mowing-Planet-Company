@@ -44,13 +44,6 @@ namespace MowingPlanetCompany.StageScene
 
         #endregion
         #region Method
-        private void Awake()
-        {
-            m_anim = GetComponent<Animator>();
-            m_charaCtrl = GetComponent<CharacterController>();
-            m_timeManager = TimeManager.Instance;
-        }
-
         private void Move()
         {
             //方向の入力を取得する
@@ -94,13 +87,13 @@ namespace MowingPlanetCompany.StageScene
             }
         }
 
-        /// <summary>
-        /// Update
-        /// </summary>
-        private void Update()
-        {
-            Move();
-        }
+        #endregion
+
+        #region Properties
+        #endregion
+        #region Variables
+        #endregion
+        #region Methods
 
         /// <summary>
         /// Ons the attack.
@@ -113,11 +106,21 @@ namespace MowingPlanetCompany.StageScene
                 m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
             }
         }
-
-
-
-
         #endregion
+        #region Callbacks
+        private void Awake()
+        {
+            m_anim = GetComponent<Animator>();
+            m_charaCtrl = GetComponent<CharacterController>();
+            m_timeManager = TimeManager.Instance;
+        }
+
+        private void Update()
+        {
+            Move();
+        }
+        #endregion
+        #region Enums
         public enum AnimationStates
         {
             FirstCombo,
@@ -126,5 +129,6 @@ namespace MowingPlanetCompany.StageScene
             Idle,
             Run,
         }
+        #endregion
     }
 }
