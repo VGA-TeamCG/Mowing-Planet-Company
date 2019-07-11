@@ -8,15 +8,13 @@ using UnityEngine;
 
 public class ChangeStatement : MonoBehaviour
 {
+    [SerializeField]GameObject receipt;
+    [SerializeField]GameObject detailedStatement;
     bool isReceipt = true;
-    GameObject receipt;
-    GameObject detailedStatement;
 
     void Start()
     {
-        receipt = GameObject.Find("Receipt");
         receipt.GetComponent<Canvas>().enabled = true;
-        detailedStatement = GameObject.Find("DetailedStatement");
         detailedStatement.GetComponent<Canvas>().enabled = false;
     }
 
