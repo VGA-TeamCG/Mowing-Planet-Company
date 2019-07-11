@@ -84,13 +84,14 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>タイムスコアの計算</summary>
         public void CalculateTimeScore()
         {
-            TimeScore = TimePerPoint;  // 残り時間を「TimeManager(?)」から参照する
+            TimeScore = TimePerPoint /*leftTime*/;  // 残り時間を「TimeManager」から参照する(もらう)
         }
 
         /// <summary>コンボスコアの計算</summary>
         public void CalculateComboScore()
         {
             // 後で実装する
+            // 全合計スコアにコンボボーナスを掛ける
         }
 
         /// <summary>トータルスコアの計算</summary>
@@ -99,7 +100,7 @@ namespace MowingPlanetCompany.StageScene
             TotalScore = ComboScore;
         }
 
-        public void SetScoreToText()
+        public void SetScoreToText()  // 残り時間を「TimeManager」から参照する(もらう)
         {
             tc.SetValue(NormalGrassPerPoint,    NormalGrassCount,    NormalGrassScore,
                         NigenigeGrassPerPoint,  NigenigeGrassCount,  NigenigeGrassScore,
