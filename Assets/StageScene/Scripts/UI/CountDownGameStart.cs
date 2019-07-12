@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace MowingPlanetCompany
 {
-    public class CountDownGameStart : MonoBehaviour
+    public class GameStarter : MonoBehaviour
     {
         [TextArea(0, 2)]
         [SerializeField] List<string> displayScript;

@@ -11,21 +11,19 @@ namespace MowingPlanetCompany.StageScene
         #endregion
         #region Variables
         TimeManager timeManager;
+        TurnBasedStateMachine TBStateMachine;
         #endregion
         #region Methods
-        void StartGame()
-        {
-            timeManager.StartCountDown();
-        }
         #endregion
         #region Callbacks
         private void Awake()
         {
             timeManager = TimeManager.Instance;
+            TBStateMachine = TurnBasedStateMachine.Instance;
         }
         private void Start()
         {
-            StartGame();
+            TBStateMachine.SetStateMachine(TurnBasedStateMachine.States.State.InitGame);
         }
         #endregion
         #region Enums
