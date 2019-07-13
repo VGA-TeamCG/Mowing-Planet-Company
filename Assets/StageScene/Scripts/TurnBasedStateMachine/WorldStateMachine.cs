@@ -8,13 +8,19 @@ namespace MowingPlanetCompany.StageScene
     /// <summary>
     /// StateMachine.
     /// </summary>
-    public class TurnBasedStateMachine : MonoSingleton<TurnBasedStateMachine>
+    public class WorldStateMachine : MonoSingleton<WorldStateMachine>
     {
         /// <summary>State machine</summary>
-        public States m_StateMachine;
+        public States m_StateMachine = new States();
         /// <summary>Custom UnityEvent</summary>
         public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
 
+        /// <summary>
+        /// 現在のステートが指定した引数と同じステートかどうか
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns>true = 同じステート. false = 同じステートではない</returns>
+        public bool WheterCurrentState(States.State state) => m_StateMachine.CurrentState == state;
         /// <summary>
         /// 指定したステートに遷移させてEventを発行する
         /// </summary>
@@ -22,12 +28,12 @@ namespace MowingPlanetCompany.StageScene
         public void SetStateMachine(States.State state)
         {
             // ステート遷移前のステートを保存 
-            m_StateMachine.PreviousState = m_StateMachine.NowState;
+            m_StateMachine.PreviousState = m_StateMachine.CurrentState;
             if (state == States.State.Pause ) // 遷移先がPauseステートの時保存
             {
-                m_StateMachine.StateBeforeWithoutSpecialState = m_StateMachine.NowState;
+                m_StateMachine.StateBeforeWithoutSpecialState = m_StateMachine.CurrentState;
             }
-            m_StateMachine.NowState = state; // stateをセット
+            m_StateMachine.CurrentState = state; // stateをセット
 
             Debug.Log(state);
             // ==================================
@@ -35,7 +41,6 @@ namespace MowingPlanetCompany.StageScene
             // ==================================
             m_BehaviourByState.Invoke(state);
         }
-
         /// <summary>
         /// State machine event.
         /// </summary>
@@ -50,7 +55,7 @@ namespace MowingPlanetCompany.StageScene
         public class States
         {
             /// <summary>Represents the current state.</summary>
-            public State NowState { get; set; }
+            public State CurrentState { get; set; }
             public State PreviousState { get; set; }
             public State StateBeforeWithoutSpecialState { get; set; } 
 

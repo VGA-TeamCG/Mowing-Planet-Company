@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6523905095194662293}
   - component: {fileID: 4759693674705397285}
   - component: {fileID: 4081790306468296105}
-  - component: {fileID: 5488719986549346430}
+  - component: {fileID: 5903492658143952323}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -380,7 +380,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   colorSeparation: 0.5
---- !u!114 &5488719986549346430
+--- !u!114 &5903492658143952323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -392,7 +392,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8fc255f2eac6d4b881d9fa3a6fa6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayScript:
-  - 3
-  - 2
-  - 1
+  displayScript: []

@@ -10,22 +10,23 @@ namespace MowingPlanetCompany.StageScene
     public class InitGame : StateBehaviourBase
     {
         [SerializeField] GameStarter gameStarter;
-
+        [SerializeField] float firstWaitTime = 5f;
         private void Start()
         {
             // Register event
-            m_stageManager.m_BehaviourByState.AddListener((state) =>
+            worldStateMachine.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != TurnBasedStateMachine.States.State.InitGame)
+                if(state != WorldStateMachine.States.State.InitGame)
                 {
                     return;
                 }
-
-                gameStarter.
-                
-                
+                StartCoroutine(Initialize());
             });
+        }
+        IEnumerator Initialize()
+        {
+            yield return new WaitForSeconds(firstWaitTime);
+            gameStarter.StartCountDown();
         }
     }
 }
-

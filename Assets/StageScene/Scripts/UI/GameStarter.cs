@@ -1,33 +1,51 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace MowingPlanetCompany.StageScene
 {
-    public class StartGameButton : MonoBehaviour
+    public class GameStarter : MonoBehaviour
     {
-        [SerializeField] GameObject gameStartUI;
-        [SerializeField] float animTIme = 1f;
-         [SerializeField] iTween.EaseType easetype;
+        [TextArea(0, 2)]
+        [SerializeField] List<string> displayScript;
 
-        public void StartGame()
+        TypefaceAnimator typefaceAnim;
+        Text textBox;
+
+        private void Awake()
         {
-            TimeManager.Instance.StartCountDown();
-            gameStartUI.SetActive(false);
+            typefaceAnim = GetComponent<TypefaceAnimator>();
+            textBox = GetComponent<Text>();
         }
 
-        public void VisibleGameStartDisplay()
+        private void Start()
         {
-            var hash = new Hashtable()
+            typefaceAnim.onComplete.AddListener(() =>
             {
-                {"from",0f },
-                {"to",1f },
-                {"time",animTIme },
-                {"easetype",easetype },
-            };
-
-            gameStartUI.SetActive(true);
-            iTween.ValueTo(gameStartUI, hash);
+                // 次のtextが存在する場合
+                if (displayScript.IndexOf(textBox.text) + 1 < displayScript.Count)
+                {
+                    textBox.text = displayScript[displayScript.IndexOf(textBox.text) + 1];
+                    typefaceAnim.Play();
+                }
+                else
+                {
+                    // call event
+                    WorldStateMachine.Instance.SetStateMachine(WorldStateMachine.States.State.InTheGame);
+                    transform.parent.gameObject.SetActive(false);
+                }
+            });
+        }
+        /// <summary>
+        /// Count downの演出を行った後、
+        /// </summary>
+        public void StartCountDown()
+        {
+            textBox.text = displayScript[0];
+            typefaceAnim.Play();
         }
     }
 }
