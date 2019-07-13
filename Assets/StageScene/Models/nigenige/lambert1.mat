@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: lambert1
   m_Shader: {fileID: 4800000, guid: 81c78af1892b7b04490577cfd9455008, type: 3}
   m_ShaderKeywords: 
@@ -35,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bf2325dde446c3f4b8ea32ed3f0f845f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -47,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 04489de1a2e1e5c4597f057339b58541, type: 3}
+        m_Texture: {fileID: 2800000, guid: 775dbb1ca648e744faca1160826e83ef, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9995325f3aa5a0a449295794318b4f95, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -67,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: 1cba0ff01e4b5b542af5e61996b3a1e9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16c26eb8f9c6aec438938ef2afb618a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Specular:

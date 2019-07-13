@@ -96,6 +96,11 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         public void OnAttack()
         {
+            if(!wsm.WheterCurrentState(WorldStateMachine.States.State.InTheGame))
+            {
+                return;
+            }
+
             // 3連撃目ではない時Triggerをセットする　
             if (!m_anim.GetCurrentAnimatorStateInfo(0).IsName(AnimState.ThirdCombo.ToString()))
             {

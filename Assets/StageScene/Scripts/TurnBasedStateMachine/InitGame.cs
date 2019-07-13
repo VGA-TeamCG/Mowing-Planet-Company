@@ -11,18 +11,20 @@ namespace MowingPlanetCompany.StageScene
     {
         [SerializeField] GameStarter gameStarter;
         [SerializeField] float firstWaitTime = 5f;
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
             // Register event
-            worldStateMachine.m_BehaviourByState.AddListener((state) =>
+            wsm.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != WorldStateMachine.States.State.InitGame)
+                if(!wsm.WheterCurrentState(state))
                 {
                     return;
                 }
                 StartCoroutine(Initialize());
             });
         }
+
         IEnumerator Initialize()
         {
             yield return new WaitForSeconds(firstWaitTime);

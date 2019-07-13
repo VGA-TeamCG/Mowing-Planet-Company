@@ -35,7 +35,8 @@ namespace MowingPlanetCompany.StageScene
                 {
                     // call event
                     WorldStateMachine.Instance.SetStateMachine(WorldStateMachine.States.State.InTheGame);
-                    transform.parent.gameObject.SetActive(false);
+                    textBox.text = "";
+                    Destroy(transform.parent.gameObject);
                 }
             });
         }
@@ -44,8 +45,11 @@ namespace MowingPlanetCompany.StageScene
         /// </summary>
         public void StartCountDown()
         {
-            textBox.text = displayScript[0];
-            typefaceAnim.Play();
+            if (textBox != null)
+            {
+                textBox.text = displayScript[0];
+                typefaceAnim.Play();
+            }
         }
     }
 }

@@ -10,9 +10,9 @@ namespace MowingPlanetCompany.StageScene
         private void Start()
         {
             // Register event
-            worldStateMachine.m_BehaviourByState.AddListener((state) =>
+            wsm.m_BehaviourByState.AddListener((state) =>
             {
-                if (state != WorldStateMachine.States.State.InTheGame)
+                if (!wsm.WheterCurrentState(state))
                 {
                     return;
                 }

@@ -29,13 +29,9 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>パクパク花のスコア</summary>
         public int PakupakuFlowerScore { get; set; }
         /// <summary>ツキツキ樹の一体毎のポイント</summary>
-<<<<<<< HEAD
         public int TsukiTsukiWoodPerPoint { get; set; }
-=======
-        public int TukiTukiWoodPerPoint { get; set; }
         /// <summary>ツキツキ樹を何体倒したか</summary>
-        public int TukiTukiWoodCount { get; set; }
->>>>>>> Toshihiro
+        public int TsukiTsukiWoodCount { get; set; }
         /// <summary>ツキツキ樹のスコア</summary>
         public int TsukiTsukiWoodScore { get; set; }
         /// <summary>タイム(現状１秒)毎のポイント</summary>
@@ -50,7 +46,6 @@ namespace MowingPlanetCompany.StageScene
         public int TotalScore { get; set; }
         #endregion
 
-<<<<<<< HEAD
         #region Methods
         //public void AddScore
         #endregion
@@ -58,9 +53,7 @@ namespace MowingPlanetCompany.StageScene
         #region Enums
 
         #endregion
-=======
-        [SerializeField]TextController tc;
-
+        [SerializeField] TextController tc;
         void Start()
         {
             tc = gameObject.GetComponent<TextController>();
@@ -90,8 +83,8 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>ツキツキ樹のスコア計算</summary>
         public void CalculateTukiTukiWoodScore()
         {
-            TukiTukiWoodCount++;
-            TukiTukiWoodScore += TukiTukiWoodPerPoint;
+            TsukiTsukiWoodCount++;
+            TsukiTsukiWoodScore += TsukiTsukiWoodPerPoint;
         }
 
         /// <summary>タイムスコアの計算</summary>
@@ -115,14 +108,12 @@ namespace MowingPlanetCompany.StageScene
 
         public void SetScoreToText()  // 残り時間を「TimeManager」から参照する(もらう)
         {
-            tc.SetValue(NormalGrassPerPoint,    NormalGrassCount,    NormalGrassScore,
-                        NigenigeGrassPerPoint,  NigenigeGrassCount,  NigenigeGrassScore,
+            tc.SetValue(NormalGrassPerPoint, NormalGrassCount, NormalGrassScore,
+                        NigenigeGrassPerPoint, NigenigeGrassCount, NigenigeGrassScore,
                         PakupakuFlowerPerPoint, PakupakuFlowerCount, PakupakuFlowerScore,
-                        TukiTukiWoodPerPoint,   TukiTukiWoodCount,   TukiTukiWoodScore,
-                        
-                        ComboPerPoint,          ComboScore,
+                        TsukiTsukiWoodPerPoint, TsukiTsukiWoodCount, TsukiTsukiWoodScore,
+                        ComboPerPoint, ComboScore,
                         TotalScore);
         }
->>>>>>> Toshihiro
     }
 }
