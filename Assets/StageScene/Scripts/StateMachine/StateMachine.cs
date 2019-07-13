@@ -34,7 +34,7 @@ namespace MowingPlanetCompany.StageScene
         {
             if (currentState != null)
             {
-                currentState.Excute();
+                currentState.Execute();
             }
         }
     }

@@ -9,7 +9,6 @@ namespace MowingPlanetCompany.StageScene
     {
         #region Field
         [Header("Parameters")]
-
         /// <summary>移動速度を調整するパラメータ</summary>
         [SerializeField] protected float m_moveSpeed = 5f;
         /// <summary>プレイヤーが回転する速度</summary>
@@ -19,18 +18,15 @@ namespace MowingPlanetCompany.StageScene
         // 重力加速度を調整するパラメーター
         [SerializeField] float m_gravityMultiplier = 1f;
 
-
-
-
         [Header("Components")]
-
         /// <summary>同じオブジェクトに追加された CharacterController への参照</summary>
         protected CharacterController m_charaCtrl;
         /// <summary>操作の標準とする向き</summary>
         [SerializeField] Transform m_directionalStandard;
         /// <summary>浮動ジョイスティック</summary>
         [SerializeField] FloatingJoystick m_FJoyStick;
-        TimeManager m_timeManager;
+        WorldStateMachine wsm;
+
 
 
         /// <summary>同じオブジェクトに追加された Animator への参照</summary>
@@ -44,13 +40,6 @@ namespace MowingPlanetCompany.StageScene
 
         #endregion
         #region Method
-        private void Awake()
-        {
-            m_anim = GetComponent<Animator>();
-            m_charaCtrl = GetComponent<CharacterController>();
-            m_timeManager = TimeManager.Instance;
-        }
-
         private void Move()
         {
             //方向の入力を取得する
@@ -94,13 +83,13 @@ namespace MowingPlanetCompany.StageScene
             }
         }
 
-        /// <summary>
-        /// Update
-        /// </summary>
-        private void Update()
-        {
-            Move();
-        }
+        #endregion
+
+        #region Properties
+        #endregion
+        #region Variables
+        #endregion
+        #region Methods
 
         /// <summary>
         /// Ons the attack.
@@ -113,11 +102,24 @@ namespace MowingPlanetCompany.StageScene
                 m_anim.SetTrigger(AnimParameter.Attack.ToString()); //アタックアニメーション
             }
         }
-
-
-
-
         #endregion
+        #region Callbacks
+        private void Awake()
+        {
+            m_anim = GetComponent<Animator>();
+            m_charaCtrl = GetComponent<CharacterController>();
+            wsm = WorldStateMachine.Instance;
+        }
+
+        private void Update()
+        {
+            if (wsm.WheterCurrentState(WorldStateMachine.States.State.InTheGame))
+            {
+                Move();
+            }
+        }
+        #endregion
+        #region Enums
         public enum AnimationStates
         {
             FirstCombo,
@@ -126,5 +128,6 @@ namespace MowingPlanetCompany.StageScene
             Idle,
             Run,
         }
+        #endregion
     }
 }

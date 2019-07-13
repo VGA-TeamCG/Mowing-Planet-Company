@@ -27,7 +27,7 @@ public class State<T,TEnum>
     /// <summary>
     /// このステートで有る間、毎フレーム呼ばれる
     /// </summary>
-    public virtual void Excute() { }
+    public virtual void Execute() { }
     /// <summary>
     /// このステートから他のステートに遷移する時に一度だけ呼ばれる
     /// </summary>
