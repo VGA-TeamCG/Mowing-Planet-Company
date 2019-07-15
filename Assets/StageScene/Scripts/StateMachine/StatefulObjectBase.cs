@@ -7,6 +7,8 @@ namespace MowingPlanetCompany.StageScene
     public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
         where T : class where TEnum : System.IConvertible
     {
+        public StateMachine<T, TEnum> StateMachine => stateMachine;
+
         protected List<State<T, TEnum>> stateList = new List<State<T, TEnum>>();
         protected StateMachine<T, TEnum> stateMachine = new StateMachine<T, TEnum>();
 
@@ -16,7 +18,16 @@ namespace MowingPlanetCompany.StageScene
             {
                 return;
             }
-            var targetState = stateList.Find(state => state.Identity.ToInt32(null) == nextState.ToInt32(null));
+            var targetState = stateList.Find(state =>
+            {
+                Debug.Log($"state = {state.Identity} = {state.Identity.ToInt32(null)}");
+                Debug.Log($"nextState = {nextState}=  {nextState.ToInt32(null)}");
+                if (state.Identity.ToInt32(null) == nextState.ToInt32(null))
+                {
+                    return true;
+                }
+                return false;
+            });
             stateMachine.ChangeState(targetState);
         }
 

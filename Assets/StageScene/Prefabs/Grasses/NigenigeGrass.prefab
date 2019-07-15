@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 136958181794487478}
   - component: {fileID: 1432097621}
   - component: {fileID: 1432097620}
+  - component: {fileID: 2089184215}
   m_Layer: 0
   m_Name: NigenigeGrass
   m_TagString: Grass
@@ -43,7 +44,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1633803711174582}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.33
   m_Height: 1
   m_Direction: 1
@@ -76,25 +77,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707aa9f30bd2aa4ba624751dbd8bba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status:
-    Life: 0
-    MaxLife: 0
-    Atk: 0
-    Speed: 1
-    grassPerPoint: 0
-    grassScore: 0
-    grassID: 1
-    activityRange: 100
-    pursuitSqrDistance: 100
-    attackSqrDistance: 20
-    escapeSqrDistance: 10
-    margin: 0
-    changeTargetSqrDistance: 0
-    rotationSmooth: 0
-  heightPower: 0
-  spherePower: 0
-  destroyDelayTime: 1
   currentState: 0
+  status:
+    Life: 5
+    MaxLife: 5
+    Atk: 1
+    Speed: 10
+    grassPoint: 0
+    grassID: 1
+    activeRange: 0
+    pursuitRange: 0
+    attackDistance: 2
+    escapeDistance: 5
+    margin: 0
+    changeTargetDistance: 2
+    rotationSmooth: 0.1
+    changeStateLimitTime: 15
+    detectSensorRange: 0
+  heightPower: 1
+  spherePower: 5
+  destroyDelayTime: 3.33
+  positionGizmo: {fileID: 3870611082916859956, guid: a3b6590ad0068ef45a9fbe4348795099,
+    type: 3}
+--- !u!114 &2089184215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633803711174582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c2ba5e11d86d14aa2e83fbc989469f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  widthAngle: 360
+  heightAngle: 0
+  length: 1
+  color: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
 --- !u!1 &1719215435012302
 GameObject:
   m_ObjectHideFlags: 0

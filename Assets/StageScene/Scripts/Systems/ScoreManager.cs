@@ -69,7 +69,7 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>ニゲニゲ草のスコア計算</summary>
         public void CalculateNigenigeGrassScore()
         {
-            NormalGrassCount++;
+            NigenigeGrassCount++;
             NigenigeGrassScore += NigenigeGrassPerPoint;
         }
 
