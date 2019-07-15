@@ -16,8 +16,8 @@ namespace MowingPlanetCompany.StageScene
             {
                 return;
             }
-            Debug.Log(string.Format("go is {0}. state index is {1}", gameObject.name, nextState.ToInt32(null).ToString()));
-            stateMachine.ChangeState(stateList.Find(state => state.identity.ToInt32(null) == nextState.ToInt32(null)));
+            var targetState = stateList.Find(state => state.Identity.ToInt32(null) == nextState.ToInt32(null));
+            stateMachine.ChangeState(targetState);
         }
 
         public virtual bool IsCurrentState(TEnum identity)
@@ -26,7 +26,7 @@ namespace MowingPlanetCompany.StageScene
             {
                 return false;
             }
-            return stateMachine.CurrentState.identity.Equals(identity);
+            return stateMachine.CurrentState.Identity.Equals(identity);
         }
 
         protected virtual void Update()

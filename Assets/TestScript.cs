@@ -6,12 +6,9 @@ namespace MowingPlanetCompany.StageScene
 {
     public class TestScript : MonoBehaviour
     {
-#if true
+#if false
         [SerializeField] WorldStateMachine.States.State state;
-        private void Update ()
-        {
-            Debug.Log($"Time.timeScale is {Time.timeScale}");
-        }
+        
 #endif
     }
 }

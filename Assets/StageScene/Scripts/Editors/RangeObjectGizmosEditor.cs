@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace CellsEcosystem
+namespace MowingPlanetCompany.StageScene
 {
     public static class RangeObjectGizmosEditor
     {

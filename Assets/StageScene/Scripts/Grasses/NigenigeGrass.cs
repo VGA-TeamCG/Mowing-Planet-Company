@@ -7,7 +7,6 @@ namespace MowingPlanetCompany.StageScene
     /// <summary>
     /// ニゲニゲ草
     /// </summary>
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
     public class NigenigeGrass : GrassesBase<NigenigeGrass>
     {
@@ -25,12 +24,14 @@ namespace MowingPlanetCompany.StageScene
             stateList.Add(new MyStateAttack(this, GrassState.Attack));
             stateList.Add(new MyStateDestory(this, GrassState.ToDie));
             stateList.Add(new MyStatePursuit(this, GrassState.Pursuit));
-            ChangeState(GrassState.Pursuit);
+            stateList.Add(new MyStateStop(this, GrassState.Stop));
+            ChangeState(GrassState.Wander);
         }
 
         protected override void Update()
         {
             base.Update();
+
         }
 
         /// <summary>
@@ -93,5 +94,19 @@ namespace MowingPlanetCompany.StageScene
             public override void Execute() { base.Execute(); }
             public override void Exit() { base.Exit(); }
         }
+
+        /// <summary>
+        /// 追跡ステート　
+        /// </summary>
+        private class MyStateStop : StateStop<NigenigeGrass>
+        {
+            public MyStateStop(NigenigeGrass owner, GrassState identity) : base(owner, identity) { }
+
+            public override void Enter() { base.Enter(); }
+            public override void Execute() { base.Execute(); }
+            public override void Exit() { base.Exit(); }
+        }
+
+
     }
 }

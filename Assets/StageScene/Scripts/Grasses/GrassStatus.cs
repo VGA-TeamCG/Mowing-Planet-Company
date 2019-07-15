@@ -14,19 +14,20 @@ namespace MowingPlanetCompany.StageScene
         public GrassID GrassId { get { return grassID; } set { grassID = value; } }
         /// <summary>有効半径</summary>
         public float ActivityRange { get { return activityRange; } set { activityRange = value; } }
-        /// <summary>追跡に遷移するかどうかを判断する距離(2乗)</summary>
-        public float PursuitSqrDistance { get { return pursuitSqrDistance; } set { pursuitSqrDistance = value; } }
+        /// <summary>追跡に遷移するかどうかを判断する距離</summary>
+        public float PursuitDistance { get { return pursuitDistance; } set { pursuitDistance = value; } }
         /// <summary>攻撃ステート用範囲</summary>
-        public float AttackSqrDistance { get { return attackSqrDistance; } set { attackSqrDistance = value; } }
+        public float AttackDistance { get { return attackDistance; } set { attackDistance = value; } }
         /// <summary>範囲マージン</summary>
         public float Margin { get { return margin; } set { margin = value; } }
         /// <summary>徘徊ステート時のターゲット変更距離</summary>
-        public float ChangeTargetSqrDistance { get { return changeTargetSqrDistance; } set { changeTargetSqrDistance = value; } }
+        public float ChangeTargetDistance { get { return changeTargetDistance; } set { changeTargetDistance = value; } }
         /// <summary>キャラ回転の補間レート</summary>
         public float RotationSmooth { get { return rotationSmooth; } set { rotationSmooth = value; } }
         /// <summary>逃走ステート用範囲</summary>
-        public float EscapeSqrDistance { get { return escapeSqrDistance; } set { escapeSqrDistance = value; } }
-
+        public float EscapeDistance { get { return escapeDistance; } set { escapeDistance = value; } }
+        public float ChangeStateLimitTime { get { return changeStateLimitTime; } set { changeStateLimitTime = value; } }
+        
 
         [Header("ノーマル草の一体毎のポイント")]
         [SerializeField] protected int grassPerPoint;
@@ -37,16 +38,18 @@ namespace MowingPlanetCompany.StageScene
         [Header("有用半径")]
         [SerializeField] float activityRange;
         [Header("追跡ステート用範囲")]
-        [SerializeField] float pursuitSqrDistance;
+        [SerializeField] float pursuitDistance;
         [Header("攻撃ステート用範囲")]
-        [SerializeField] float attackSqrDistance;
+        [SerializeField] float attackDistance;
         [Header("逃走ステート用範囲")]
-        [SerializeField] float escapeSqrDistance;
+        [SerializeField] float escapeDistance;
         [Header("範囲マージン")]
         [SerializeField] float margin;
         [Header("徘徊ステート時のターゲット変更距離")]
-        [SerializeField] float changeTargetSqrDistance;
+        [SerializeField] float changeTargetDistance;
         [Header("キャラ回転の補間レート")]
         [SerializeField] float rotationSmooth;
+        [Header("ステートを変更させるリミットタイム")]
+        [SerializeField] float changeStateLimitTime;
     }
 }
