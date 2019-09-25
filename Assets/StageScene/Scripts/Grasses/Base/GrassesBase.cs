@@ -8,7 +8,7 @@ namespace MowingPlanetCompany.StageScene
     /// 
     /// </summary>
     /// <typeparam name="T">各草クラス.</typeparam>
-    [RequireComponent(typeof(GizmoObject), typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody))]
     public abstract class GrassesBase<T> : StatefulObjectBase<T, GrassState> where T : class
     {
         #region Properties
@@ -33,9 +33,9 @@ namespace MowingPlanetCompany.StageScene
         /// <summary>破壊迄の遅延時間</summary>
         [SerializeField] float destroyDelayTime = 1f;
         [SerializeField] GameObject positionGizmo;
+        [SerializeField] protected GizmoObject gizmoObj;
         protected TimeManager timeManager;
         /// <summary>Gizmo of sensor range</summary>
-        protected GizmoObject gizmoObj;
         /// <summary>
         /// Gizumoのwidthに毎フレーム渡す値.
         /// ステート毎にここに代入する変数をかえる.
@@ -47,8 +47,11 @@ namespace MowingPlanetCompany.StageScene
         protected virtual void Awake()
         {
             timeManager = TimeManager.Instance;
-            gizmoObj = GetComponent<GizmoObject>();
             Rb = GetComponent<Rigidbody>();
+            if(!gizmoObj)
+            {
+                gizmoObj = transform.GetComponentInChildren(typeof(GizmoObject),true) as GizmoObject;
+            }
         }
         protected override void Update()
         {
@@ -59,7 +62,6 @@ namespace MowingPlanetCompany.StageScene
             //var adjustRot = new Quaternion(0f, transform.rotation.y, 0f, transform.rotation.w);
             //transform.rotation = adjustRot;
             currentState = stateMachine.CurrentState.Identity;
-            Debug.Log(stateMachine.CurrentState.Identity);
         }
         /// <summary>
         /// Colliderと衝突した時のコールバック
