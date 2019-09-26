@@ -27,14 +27,14 @@ namespace MowingPlanetCompany.StageScene
         }
         public override void Execute()
         {
-            Debug.DrawLine(owner.transform.position, owner.transform.position+ owner.transform.forward * 10, Color.red);
+            Debug.DrawLine(owner.transform.position, owner.transform.position + owner.transform.forward * 10, Color.red);
             time = Time.deltaTime;
             // ステートが始まってからが指定時間経ったらステート変更
             if (ElapsedTimeSinseStateStart > owner.Status.ChangeStateLimitTime)
             {
                 owner.ChangeState(GrassState.Stop);
             }
-            // プレイヤーとの距離が小さければ追跡ステートに遷移
+            // プレイヤーとの距離が小さければEscapeステートに遷移
             var distanceToPlayer = Vector3.Magnitude(owner.transform.position - owner.Player.position);
             if (distanceToPlayer < owner.Status.DetectSensorRange)
             {
@@ -42,7 +42,7 @@ namespace MowingPlanetCompany.StageScene
                 owner.ChangeState(GrassState.Escape);
             }
             // 目標地点との距離が小さければ、次のランダムな目標地点を設定する
-            var distanceToTarget = Vector3.Magnitude(owner.transform.position - targetPosition);
+            var distanceToTarget = Vector3.Magnitude(targetPosition - owner.transform.position);
             if (distanceToTarget < owner.Status.ChangeTargetDistance || time > changeDirectionTime)
             {
                 targetPosition = GetRandomPositionOnLevel();
@@ -52,17 +52,23 @@ namespace MowingPlanetCompany.StageScene
                     posGizmo = null;
                 }
                 posGizmo = GameObject.Instantiate(owner.PositionGizmo, targetPosition, Quaternion.identity);
-                Debug.Log(targetPosition);
                 time = 0;
             }
 
             var vec = targetPosition - owner.transform.position;
             var targetRot = Quaternion.LookRotation(vec);
-            //owner.gameObject.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, owner.Status.RotationSmooth);
-            owner.gameObject.transform.rotation = targetRot;
+            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRot, owner.Status.RotationSmooth);
             owner.Rb.velocity = owner.gameObject.transform.forward * owner.Status.Speed;
+
         }
-        public override void Exit() { }
+        public override void Exit()
+        {
+            if (posGizmo != null)
+            {
+                GameObject.Destroy(posGizmo);
+                posGizmo = null;
+            }
+        }
 
         /// <summary>
         /// 指定半径内の座標をランダムに返す

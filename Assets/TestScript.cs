@@ -6,9 +6,9 @@ namespace MowingPlanetCompany.StageScene
 {
     public class TestScript : MonoBehaviour
     {
-#if false
-        [SerializeField] WorldStateMachine.States.State state;
-        
-#endif
+        private void FixedUpdate()
+        {
+            transform.Rotate(Vector3.up, 90 * Time.deltaTime);
+        }
     }
 }
